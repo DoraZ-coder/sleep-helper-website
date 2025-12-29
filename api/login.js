@@ -8,31 +8,59 @@ export default async function handler(req, res) {
     }
 
     try {
-        const { email, password } = req.body;
+        const { email, password, autoRegister } = req.body;
 
         // 验证输入
         if (!email || !password) {
             return res.status(400).json({ error: '邮箱和密码不能为空' });
         }
 
+        // 验证邮箱格式
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            return res.status(400).json({ error: '邮箱格式不正确' });
+        }
+
+        // 验证密码长度
+        if (password.length < 6) {
+            return res.status(400).json({ error: '密码至少需要6位字符' });
+        }
+
         const redis = getRedis();
+        let isNewUser = false;
 
         // 获取用户数据
         const userDataStr = await redis.get(`user:${email}`);
-        if (!userDataStr) {
-            return res.status(401).json({ error: '邮箱或密码错误' });
-        }
 
-        const userData = JSON.parse(userDataStr);
-
-        // 验证密码
+        let userData;
         const passwordHash = crypto
             .createHash('sha256')
             .update(password)
             .digest('hex');
 
-        if (passwordHash !== userData.passwordHash) {
-            return res.status(401).json({ error: '邮箱或密码错误' });
+        if (!userDataStr) {
+            // 用户不存在
+            if (autoRegister) {
+                // 自动创建新用户
+                userData = {
+                    email: email,
+                    passwordHash: passwordHash,
+                    isPurchased: false,
+                    createdAt: new Date().toISOString(),
+                    lastLoginAt: null
+                };
+                await redis.set(`user:${email}`, JSON.stringify(userData));
+                isNewUser = true;
+            } else {
+                return res.status(401).json({ error: '邮箱或密码错误' });
+            }
+        } else {
+            // 用户存在，验证密码
+            userData = JSON.parse(userDataStr);
+
+            if (passwordHash !== userData.passwordHash) {
+                return res.status(401).json({ error: '邮箱或密码错误' });
+            }
         }
 
         // 生成token（简单版本：email + 时间戳的hash）
@@ -53,7 +81,8 @@ export default async function handler(req, res) {
             success: true,
             token: token,
             email: userData.email,
-            isPurchased: userData.isPurchased
+            isPurchased: userData.isPurchased,
+            isNewUser: isNewUser
         });
 
     } catch (error) {
