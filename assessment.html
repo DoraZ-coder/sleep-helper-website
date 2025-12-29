@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>睡眠评估 - 睡眠助手</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">睡眠助手</div>
+            <ul class="nav-links">
+                <li><a href="index.html">首页</a></li>
+                <li><a href="content.html">睡眠知识</a></li>
+                <li><a href="membership.html">会员</a></li>
+                <li><a href="about.html">关于我们</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <section class="assessment-section">
+            <div class="container">
+                <div class="assessment-header">
+                    <h1>睡眠评估</h1>
+                    <p class="subtitle">请根据最近一周的实际情况回答以下问题</p>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressBar"></div>
+                    </div>
+                    <p class="progress-text"><span id="currentQuestion">1</span> / 12</p>
+                </div>
+
+                <form id="assessmentForm">
+                    <!-- 问题1 -->
+                    <div class="question-card active" data-question="1">
+                        <h3>你通常躺下后多久能睡着？</h3>
+                        <div class="options">
+                            <label class="option">
+                                <input type="radio" name="q1" value="1" required>
+                                <span>10 分钟以内</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q1" value="2">
+                                <span>10–30 分钟</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q1" value="3">
+                                <span>30–60 分钟</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q1" value="4">
+                                <span>超过 1 小时</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- 问题2 -->
+                    <div class="question-card" data-question="2">
+                        <h3>当你睡不着时，最常发生的是？</h3>
+                        <div class="options">
+                            <label class="option">
+                                <input type="radio" name="q2" value="1" required>
+                                <span>脑子停不下来</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q2" value="2">
+                                <span>明明很累，但不困</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q2" value="3">
+                                <span>身体不舒服 / 紧绷</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q2" value="4">
+                                <span>不确定</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- 问题3 -->
+                    <div class="question-card" data-question="3">
+                        <h3>你上床时的状态更接近？</h3>
+                        <div class="options">
+                            <label class="option">
+                                <input type="radio" name="q3" value="1" required>
+                                <span>放松，期待睡觉</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q3" value="2">
+                                <span>有点焦虑</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q3" value="3">
+                                <span>明显紧张或烦躁</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q3" value="4">
+                                <span>抱着"必须睡着"的压力</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- 问题4 -->
+                    <div class="question-card" data-question="4">
+                        <h3>你通常在几点真正入睡？</h3>
+                        <div class="options">
+                            <label class="option">
+                                <input type="radio" name="q4" value="1" required>
+                                <span>22:30 前</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q4" value="2">
+                                <span>22:30–24:00</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q4" value="3">
+                                <span>24:00–01:30</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q4" value="4">
+                                <span>01:30 以后</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- 问题5 -->
+                    <div class="question-card" data-question="5">
+                        <h3>你夜里醒来的频率是？</h3>
+                        <div class="options">
+                            <label class="option">
+                                <input type="radio" name="q5" value="1" required>
+                                <span>几乎不醒</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q5" value="2">
+                                <span>偶尔醒，很快睡回去</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q5" value="3">
+                                <span>经常醒，需要一段时间</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q5" value="4">
+                                <span>醒来后很难再睡</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- 问题6 -->
+                    <div class="question-card" data-question="6">
+                        <h3>你夜醒时，最常做什么？</h3>
+                        <div class="options">
+                            <label class="option">
+                                <input type="radio" name="q6" value="1" required>
+                                <span>翻身继续睡</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q6" value="2">
+                                <span>看时间</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q6" value="3">
+                                <span>玩手机 / 想事情</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q6" value="4">
+                                <span>起床活动</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- 问题7 -->
+                    <div class="question-card" data-question="7">
+                        <h3>你清晨醒来时的感觉更像？</h3>
+                        <div class="options">
+                            <label class="option">
+                                <input type="radio" name="q7" value="1" required>
+                                <span>比较清醒</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q7" value="2">
+                                <span>还想睡，但能起</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q7" value="3">
+                                <span>非常疲惫</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q7" value="4">
+                                <span>比睡前更累</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- 问题8 -->
+                    <div class="question-card" data-question="8">
+                        <h3>白天困倦对你的影响是？</h3>
+                        <div class="options">
+                            <label class="option">
+                                <input type="radio" name="q8" value="1" required>
+                                <span>几乎没有</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q8" value="2">
+                                <span>下午容易犯困</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q8" value="3">
+                                <span>经常需要强撑</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q8" value="4">
+                                <span>影响学习 / 工作</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- 问题9 -->
+                    <div class="question-card" data-question="9">
+                        <h3>你白天的情绪状态更接近？</h3>
+                        <div class="options">
+                            <label class="option">
+                                <input type="radio" name="q9" value="1" required>
+                                <span>稳定</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q9" value="2">
+                                <span>容易烦躁</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q9" value="3">
+                                <span>焦虑或低落</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q9" value="4">
+                                <span>情绪起伏很大</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- 问题10: 多选题 -->
+                    <div class="question-card" data-question="10">
+                        <h3>你是否依赖以下方式"撑住白天"？（可多选）</h3>
+                        <div class="options checkbox-options">
+                            <label class="option checkbox-option">
+                                <input type="checkbox" name="q10" value="coffee">
+                                <span>咖啡 / 能量饮料</span>
+                            </label>
+                            <label class="option checkbox-option">
+                                <input type="checkbox" name="q10" value="makeup-sleep">
+                                <span>熬夜后补觉</span>
+                            </label>
+                            <label class="option checkbox-option">
+                                <input type="checkbox" name="q10" value="weekend-sleep">
+                                <span>周末报复性睡眠</span>
+                            </label>
+                            <label class="option checkbox-option">
+                                <input type="checkbox" name="q10" value="none">
+                                <span>基本没有</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- 问题11 -->
+                    <div class="question-card" data-question="11">
+                        <h3>最近一周，你最常出现的想法是？</h3>
+                        <div class="options">
+                            <label class="option">
+                                <input type="radio" name="q11" value="1" required>
+                                <span>睡眠还可以</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q11" value="2">
+                                <span>希望睡得更好</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q11" value="3">
+                                <span>担心今晚又睡不好</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q11" value="4">
+                                <span>对睡觉本身感到压力</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- 问题12 -->
+                    <div class="question-card" data-question="12">
+                        <h3>如果今晚依然睡不好，你最担心的是？</h3>
+                        <div class="options">
+                            <label class="option">
+                                <input type="radio" name="q12" value="1" required>
+                                <span>第二天没精神</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q12" value="2">
+                                <span>工作/学习受影响</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q12" value="3">
+                                <span>身体健康</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q12" value="4">
+                                <span>我不知道还能怎么办</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="button-group">
+                        <button type="button" class="btn-secondary" id="prevBtn" style="display: none;">上一题</button>
+                        <button type="button" class="btn-primary" id="nextBtn">下一题</button>
+                        <button type="submit" class="btn-primary" id="submitBtn" style="display: none;">查看结果</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 睡眠助手. 用心理解，科学助眠。</p>
+        </div>
+    </footer>
+
+    <script src="js/assessment.js"></script>
+</body>
+</html>

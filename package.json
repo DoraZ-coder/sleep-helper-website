@@ -1,0 +1,13 @@
+{
+  "name": "sleep-helper-website",
+  "version": "1.0.0",
+  "description": "睡眠助手网站",
+  "scripts": {
+    "dev": "vercel dev",
+    "deploy": "vercel --prod"
+  },
+  "dependencies": {
+    "@vercel/kv": "^1.0.1",
+    "crypto": "^1.0.1"
+  }
+}

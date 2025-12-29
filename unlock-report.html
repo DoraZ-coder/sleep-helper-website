@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>输入访问密码 - 睡眠助手</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">睡眠助手</div>
+            <ul class="nav-links">
+                <li><a href="index.html">首页</a></li>
+                <li><a href="content.html">睡眠知识</a></li>
+                <li><a href="membership.html">会员</a></li>
+                <li><a href="about.html">关于我们</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <section class="result-section">
+            <div class="container">
+                <div class="unlock-container" style="max-width: 500px; margin: 80px auto; text-align: center;">
+                    <h1 style="margin-bottom: 20px;">🔐 输入访问密码</h1>
+                    <p style="color: var(--secondary-text); margin-bottom: 30px;">
+                        请输入从客服微信获取的访问密码
+                    </p>
+
+                    <div style="background: white; padding: 40px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                        <input
+                            type="text"
+                            id="passwordInput"
+                            placeholder="请输入密码"
+                            style="width: 100%; padding: 15px; font-size: 16px; border: 2px solid #E0DED9;
+                                   border-radius: 8px; margin-bottom: 20px; box-sizing: border-box; text-align: center;
+                                   text-transform: uppercase;"
+                            maxlength="20"
+                            autocomplete="off"
+                        >
+
+                        <button
+                            onclick="verifyPassword()"
+                            style="width: 100%; padding: 15px; background: var(--primary-color); color: white;
+                                   border: none; border-radius: 8px; font-size: 16px; cursor: pointer; margin-bottom: 15px;">
+                            验证并查看报告
+                        </button>
+
+                        <p id="errorMessage" style="color: #D32F2F; font-size: 14px; margin: 10px 0; display: none;">
+                            密码错误，请重试
+                        </p>
+
+                        <div style="margin-top: 30px; padding-top: 30px; border-top: 1px solid #E0DED9;">
+                            <p style="color: var(--secondary-text); font-size: 14px; margin-bottom: 10px;">还没有密码？</p>
+                            <a href="result.html" style="color: var(--primary-color); text-decoration: none;">
+                                返回查看购买方式 →
+                            </a>
+                        </div>
+                    </div>
+
+                    <div style="background: #FFF9E6; padding: 20px; border-radius: 8px; margin-top: 30px; text-align: left;">
+                        <h3 style="margin-top: 0; font-size: 14px; color: var(--text-color);">💡 温馨提示：</h3>
+                        <ul style="margin: 10px 0; padding-left: 20px; color: var(--secondary-text); font-size: 13px; line-height: 1.6;">
+                            <li>密码不区分大小写</li>
+                            <li>每个密码可以重复使用</li>
+                            <li>如果忘记密码，请联系客服微信</li>
+                            <li>密码一般在付款后1-24小时内发送</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 睡眠助手. 用心理解，科学助眠。</p>
+        </div>
+    </footer>
+
+    <script>
+        // 密码验证函数
+        async function verifyPassword() {
+            const input = document.getElementById('passwordInput');
+            const password = input.value.trim().toUpperCase();
+            const errorMsg = document.getElementById('errorMessage');
+
+            if (!password) {
+                errorMsg.textContent = '请输入密码';
+                errorMsg.style.display = 'block';
+                return;
+            }
+
+            // 检查登录状态
+            const userToken = localStorage.getItem('userToken');
+            if (!userToken) {
+                errorMsg.textContent = '请先登录账号';
+                errorMsg.style.display = 'block';
+                setTimeout(() => {
+                    sessionStorage.setItem('loginRedirect', 'unlock-report.html');
+                    window.location.href = 'login.html';
+                }, 1500);
+                return;
+            }
+
+            // 禁用按钮，防止重复提交
+            const button = document.querySelector('button');
+            button.disabled = true;
+            button.textContent = '验证中...';
+
+            try {
+                // 调用后端API验证密码
+                const response = await fetch('/api/verify-password', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ password, token: userToken })
+                });
+
+                const data = await response.json();
+
+                if (response.ok && data.success) {
+                    // 验证成功，更新本地状态
+                    localStorage.setItem('isPurchased', 'true');
+
+                    // 显示成功消息
+                    errorMsg.style.display = 'none';
+                    alert(data.message || '解锁成功！');
+
+                    // 跳转到报告页面
+                    window.location.href = 'report.html';
+                } else {
+                    // 验证失败
+                    errorMsg.textContent = data.error || '密码错误，请检查后重试';
+                    errorMsg.style.display = 'block';
+                    input.value = '';
+                    input.focus();
+                    button.disabled = false;
+                    button.textContent = '验证并查看报告';
+                }
+            } catch (error) {
+                console.error('Verify password error:', error);
+                errorMsg.textContent = '网络错误，请稍后重试';
+                errorMsg.style.display = 'block';
+                button.disabled = false;
+                button.textContent = '验证并查看报告';
+            }
+        }
+
+        // 回车键提交
+        document.getElementById('passwordInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                verifyPassword();
+            }
+        });
+
+        // 页面加载时检查登录和购买状态
+        window.addEventListener('DOMContentLoaded', function() {
+            const userToken = localStorage.getItem('userToken');
+            const isPurchased = localStorage.getItem('isPurchased');
+
+            // 如果未登录，跳转到登录页
+            if (!userToken) {
+                alert('请先登录账号');
+                sessionStorage.setItem('loginRedirect', 'unlock-report.html');
+                window.location.href = 'login.html';
+                return;
+            }
+
+            // 如果已购买，询问是否直接查看
+            if (isPurchased === 'true') {
+                if (confirm('您已经解锁过报告，是否直接查看？')) {
+                    window.location.href = 'report.html';
+                }
+            }
+        });
+    </script>
+</body>
+</html>

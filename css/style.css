@@ -1,0 +1,1207 @@
+/* 全局样式 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #7FA59A;
+    --secondary-color: #7FA59A;
+    --accent-color: #6B8E84;
+    --bg-color: #F4F2EE;
+    --text-color: #2E2E2E;
+    --secondary-text: #6B6B6B;
+    --light-gray: #E0DED9;
+    --white: #FFFFFF;
+    --success-color: #7FA59A;
+    --warning-color: #B08968;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--bg-color);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* 导航栏 */
+.navbar {
+    background-color: var(--white);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 20px;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--text-color);
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: var(--secondary-color);
+}
+
+/* 主要内容区 */
+main {
+    min-height: calc(100vh - 200px);
+    padding: 2rem 0;
+}
+
+/* 首页样式 */
+.hero {
+    text-align: center;
+    padding: 4rem 0;
+}
+
+.main-tagline {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 3rem;
+    line-height: 1.3;
+}
+
+.intro-section {
+    margin: 4rem 0;
+}
+
+.intro-section h2 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    color: var(--primary-color);
+}
+
+.features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.feature-item {
+    background: var(--white);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s;
+}
+
+.feature-item:hover {
+    transform: translateY(-5px);
+}
+
+.feature-item h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--secondary-color);
+}
+
+.cta-section {
+    margin: 4rem 0;
+}
+
+.cta-text {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    color: var(--text-color);
+}
+
+/* 按钮样式 */
+.btn-primary {
+    display: inline-block;
+    padding: 1rem 2.5rem;
+    background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
+    color: var(--white);
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 4px 15px rgba(127, 165, 154, 0.3);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(127, 165, 154, 0.4);
+}
+
+.btn-primary.large {
+    padding: 1.2rem 3rem;
+    font-size: 1.2rem;
+}
+
+.btn-secondary {
+    display: inline-block;
+    padding: 0.8rem 2rem;
+    background: var(--white);
+    color: var(--secondary-color);
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 600;
+    border: 2px solid var(--secondary-color);
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-secondary:hover {
+    background: var(--secondary-color);
+    color: var(--white);
+}
+
+/* 评估页面样式 */
+.assessment-section {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.assessment-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.assessment-header h1 {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.subtitle {
+    font-size: 1.1rem;
+    color: var(--secondary-text);
+}
+
+.progress-bar {
+    width: 100%;
+    height: 8px;
+    background: var(--light-gray);
+    border-radius: 10px;
+    margin: 2rem 0 1rem;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--secondary-color), var(--accent-color));
+    width: 10%;
+    transition: width 0.3s;
+}
+
+.progress-text {
+    text-align: center;
+    color: var(--text-color);
+    font-weight: 600;
+}
+
+.question-card {
+    display: none;
+    background: var(--white);
+    padding: 3rem;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+}
+
+.question-card.active {
+    display: block;
+    animation: fadeIn 0.3s;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.question-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+    color: var(--primary-color);
+}
+
+.options {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.option {
+    display: flex;
+    align-items: center;
+    padding: 1.2rem;
+    background: var(--bg-color);
+    border: 2px solid var(--light-gray);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.option:hover {
+    border-color: var(--secondary-color);
+    background: #F9F8F6;
+}
+
+.option input[type="radio"],
+.option input[type="checkbox"] {
+    margin-right: 1rem;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.option input[type="radio"]:checked + span,
+.option input[type="checkbox"]:checked + span {
+    color: var(--secondary-color);
+    font-weight: 600;
+}
+
+.option:has(input[type="radio"]:checked),
+.option:has(input[type="checkbox"]:checked) {
+    border-color: var(--secondary-color);
+    background: #E8F0ED;
+}
+
+.button-group {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
+    gap: 1rem;
+}
+
+/* 结果页面样式 */
+.result-section {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.result-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.result-header h1 {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+}
+
+.result-card {
+    background: var(--white);
+    padding: 3rem;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.sleep-type {
+    text-align: center;
+    margin-bottom: 2rem;
+    padding-bottom: 2rem;
+    border-bottom: 2px solid var(--light-gray);
+}
+
+.sleep-type h2 {
+    font-size: 2rem;
+    color: var(--secondary-color);
+    margin-bottom: 1rem;
+}
+
+.type-badge {
+    display: inline-block;
+    padding: 0.5rem 1.5rem;
+    background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
+    color: var(--white);
+    border-radius: 25px;
+    font-weight: 600;
+}
+
+.result-description {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 3rem;
+    color: var(--text-color);
+}
+
+.next-step {
+    margin-top: 3rem;
+}
+
+.hint-box {
+    background: #E8F0ED;
+    padding: 2rem;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+}
+
+.hint-text {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.hint-subtext {
+    font-size: 1rem;
+    color: var(--text-color);
+    margin-bottom: 1rem;
+}
+
+.hint-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.hint-list li {
+    padding: 0.5rem 0;
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.hint-list li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: var(--success-color);
+    font-weight: bold;
+}
+
+.cta-box {
+    text-align: center;
+    padding: 2rem;
+}
+
+.price-info {
+    margin-top: 1rem;
+    color: var(--secondary-text);
+    font-size: 0.95rem;
+}
+
+.alternative-actions {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.link-secondary {
+    color: var(--secondary-color);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.link-secondary:hover {
+    color: var(--accent-color);
+    text-decoration: underline;
+}
+
+/* 方案页面样式 */
+.plan-section {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.plan-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.plan-header h1 {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.plan-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.plan-card {
+    background: var(--white);
+    padding: 2.5rem;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    position: relative;
+    transition: transform 0.3s;
+}
+
+.plan-card:hover {
+    transform: translateY(-5px);
+}
+
+.plan-card.featured {
+    border: 3px solid var(--secondary-color);
+    box-shadow: 0 15px 40px rgba(127, 165, 154, 0.25);
+}
+
+.plan-card .badge {
+    position: absolute;
+    top: -12px;
+    right: 20px;
+    background: var(--warning-color);
+    color: var(--white);
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.plan-name {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.plan-price {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--secondary-color);
+    margin-bottom: 2rem;
+}
+
+.plan-features h4 {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    color: var(--text-color);
+}
+
+.plan-features ul {
+    list-style: none;
+    margin-bottom: 2rem;
+}
+
+.plan-features li {
+    padding: 0.8rem 0;
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.plan-features li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: var(--success-color);
+    font-weight: bold;
+}
+
+.plan-note {
+    background: #E8F0ED;
+    padding: 2rem;
+    border-radius: 12px;
+}
+
+.plan-note h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+}
+
+.plan-note p {
+    margin-bottom: 1rem;
+    line-height: 1.8;
+}
+
+/* 单一方案样式 */
+.plan-single {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 3rem;
+}
+
+.plan-card-single {
+    background: var(--white);
+    padding: 3rem;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    width: 100%;
+    text-align: center;
+}
+
+.plan-price-large {
+    font-size: 4rem;
+    font-weight: 700;
+    color: var(--secondary-color);
+    margin-bottom: 1rem;
+    line-height: 1;
+}
+
+.plan-name-single {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-color);
+    margin-bottom: 2rem;
+    padding-bottom: 2rem;
+    border-bottom: 2px solid var(--light-gray);
+}
+
+.plan-card-single .plan-features {
+    text-align: left;
+}
+
+.plan-card-single .plan-features h4 {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    text-align: left;
+}
+
+.plan-card-single .plan-features ul {
+    list-style: none;
+    margin-bottom: 0;
+}
+
+.plan-card-single .plan-features li {
+    padding: 0.8rem 0;
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.plan-card-single .plan-features li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: var(--success-color);
+    font-weight: bold;
+}
+
+/* 内容页面样式 */
+.content-section {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.content-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.content-header h1 {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.content-nav {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+}
+
+.content-tab {
+    padding: 0.8rem 2rem;
+    background: var(--white);
+    color: var(--text-color);
+    border: 2px solid var(--light-gray);
+    border-radius: 25px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.content-tab:hover {
+    border-color: var(--secondary-color);
+    color: var(--secondary-color);
+}
+
+.content-tab.active {
+    background: var(--secondary-color);
+    color: var(--white);
+    border-color: var(--secondary-color);
+}
+
+.content-category {
+    display: none;
+}
+
+.content-category.active {
+    display: block;
+}
+
+.content-category h2 {
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-bottom: 2rem;
+}
+
+.article-card {
+    background: var(--white);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    margin-bottom: 2rem;
+}
+
+.article-card h3 {
+    font-size: 1.5rem;
+    color: var(--secondary-color);
+    margin-bottom: 1rem;
+}
+
+.article-card p {
+    margin-bottom: 1rem;
+    line-height: 1.8;
+}
+
+.article-list {
+    padding-left: 1.5rem;
+    margin: 1rem 0;
+}
+
+.article-list li {
+    margin-bottom: 0.8rem;
+    line-height: 1.8;
+}
+
+/* 会员页面样式 */
+.membership-section {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.membership-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.membership-header h1 {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.membership-intro {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 3rem;
+    font-size: 1.1rem;
+    line-height: 1.8;
+}
+
+.membership-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.membership-card {
+    background: var(--white);
+    padding: 2.5rem;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.membership-card h3 {
+    font-size: 1.8rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.membership-price {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--secondary-color);
+    margin-bottom: 2rem;
+}
+
+.membership-benefits h4 {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    text-align: left;
+}
+
+.membership-benefits ul {
+    list-style: none;
+    text-align: left;
+    margin-bottom: 2rem;
+}
+
+.membership-benefits li {
+    padding: 0.8rem 0;
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.membership-benefits li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: var(--success-color);
+    font-weight: bold;
+}
+
+.membership-note {
+    background: #E8F0ED;
+    padding: 2rem;
+    border-radius: 12px;
+    text-align: center;
+}
+
+/* 关于页面样式 */
+.about-section {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.about-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.about-header h1 {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+}
+
+.about-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.about-card {
+    background: var(--white);
+    padding: 2.5rem;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.about-card h2 {
+    font-size: 1.8rem;
+    color: var(--secondary-color);
+    margin-bottom: 1.5rem;
+}
+
+.placeholder-text {
+    color: var(--secondary-text);
+    line-height: 1.8;
+}
+
+.placeholder-text p {
+    margin-bottom: 1rem;
+}
+
+.placeholder-text ul {
+    padding-left: 1.5rem;
+    margin-top: 1rem;
+}
+
+.placeholder-text li {
+    margin-bottom: 0.5rem;
+}
+
+.about-note {
+    background: #E8F0ED;
+    padding: 2rem;
+    border-radius: 12px;
+    text-align: center;
+    margin-top: 2rem;
+}
+
+/* 页脚 */
+footer {
+    background: var(--primary-color);
+    color: var(--white);
+    text-align: center;
+    padding: 2rem 0;
+    margin-top: 4rem;
+}
+
+/* 完整报告页面样式 - 新版 */
+.full-report-section {
+    padding: 2rem 0 4rem;
+}
+
+.container-wide {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.report-title-area {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.report-title-area h1 {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+}
+
+/* Tabs导航 */
+.report-tabs {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+    overflow-x: auto;
+    padding: 0.5rem 0;
+    border-bottom: 2px solid var(--light-gray);
+}
+
+.report-tab {
+    padding: 0.8rem 1.5rem;
+    background: transparent;
+    border: none;
+    color: var(--secondary-text);
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.3s;
+    border-bottom: 3px solid transparent;
+    margin-bottom: -2px;
+}
+
+.report-tab:hover {
+    color: var(--primary-color);
+}
+
+.report-tab.active {
+    color: var(--primary-color);
+    font-weight: 600;
+    border-bottom-color: var(--primary-color);
+}
+
+/* 报告主内容区 */
+.report-main-content {
+    background: var(--white);
+    padding: 3rem;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    min-height: 600px;
+}
+
+#reportFullContent h2 {
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    line-height: 1.4;
+}
+
+#reportFullContent h3 {
+    font-size: 1.5rem;
+    color: var(--text-color);
+    margin: 2rem 0 1rem;
+}
+
+#reportFullContent h4 {
+    font-size: 1.2rem;
+    color: var(--text-color);
+    margin-bottom: 0.5rem;
+}
+
+#reportFullContent p {
+    line-height: 1.8;
+    margin-bottom: 1rem;
+    color: var(--text-color);
+}
+
+#reportFullContent ul,
+#reportFullContent ol {
+    margin: 1rem 0 1.5rem 1.5rem;
+    line-height: 1.8;
+}
+
+#reportFullContent li {
+    margin-bottom: 0.5rem;
+}
+
+#reportFullContent blockquote {
+    border-left: 4px solid var(--primary-color);
+    padding-left: 1.5rem;
+    margin: 1.5rem 0;
+    color: var(--secondary-text);
+    font-style: italic;
+}
+
+/* 特殊样式块 */
+.moment-box,
+.dialogue-box {
+    background: #F9F8F6;
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin: 1rem 0;
+    border-left: 3px solid var(--primary-color);
+}
+
+.moment-box h4,
+.dialogue-box h4 {
+    margin-top: 0;
+    color: var(--primary-color);
+}
+
+.cycle-visual {
+    background: #E8F0ED;
+    padding: 2rem;
+    border-radius: 12px;
+    margin: 1.5rem 0;
+    text-align: center;
+    font-size: 1.1rem;
+    line-height: 2;
+}
+
+.insight,
+.highlight {
+    background: #FFF9E6;
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    margin: 1.5rem 0;
+    border-left: 4px solid #E8B86D;
+    font-weight: 500;
+}
+
+/* 报告导航按钮 */
+.report-navigation {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 2px solid var(--light-gray);
+}
+
+.report-navigation button {
+    min-width: 120px;
+}
+
+/* 老的报告样式保留，以防兼容性问题 */
+.report-section {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.report-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.report-header h1 {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.report-content {
+    background: var(--white);
+    padding: 3rem;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    margin-bottom: 3rem;
+}
+
+.report-section-block {
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--light-gray);
+}
+
+.report-section-block:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.report-section-block h2 {
+    font-size: 1.6rem;
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+}
+
+.report-section-block p {
+    line-height: 1.8;
+    margin-bottom: 1rem;
+}
+
+.report-section-block ul {
+    margin: 1.5rem 0;
+    padding-left: 1.5rem;
+}
+
+.report-section-block li {
+    margin-bottom: 0.8rem;
+    line-height: 1.8;
+}
+
+.insight-box {
+    background: #F9F8F6;
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin: 1.5rem 0;
+    border-left: 4px solid var(--primary-color);
+}
+
+.insight-box p {
+    margin: 0;
+}
+
+.cycle-box {
+    background: #E8F0ED;
+    padding: 2rem;
+    border-radius: 12px;
+    margin: 1.5rem 0;
+    text-align: center;
+}
+
+.cycle-box p {
+    font-size: 1.1rem;
+    line-height: 2;
+    margin: 0;
+    color: var(--text-color);
+}
+
+.highlight-text {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    text-align: center;
+    margin: 1.5rem 0;
+}
+
+.suggestion-list {
+    list-style: none;
+    padding: 0;
+}
+
+.suggestion-list li {
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.suggestion-list li::before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+.suggestion-detail {
+    display: block;
+    margin-top: 0.5rem;
+    color: var(--secondary-text);
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.summary {
+    background: #E8F0ED;
+    padding: 2rem;
+    border-radius: 12px;
+    text-align: center;
+}
+
+.summary-text {
+    font-size: 1.3rem;
+    line-height: 1.8;
+    color: var(--text-color);
+    font-weight: 500;
+    margin-bottom: 1rem;
+}
+
+.summary-text:last-child {
+    margin-bottom: 0;
+}
+
+.report-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.report-actions .btn-primary,
+.report-actions .btn-secondary {
+    min-width: 200px;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .main-tagline {
+        font-size: 1.8rem;
+    }
+
+    .nav-links {
+        gap: 1rem;
+        font-size: 0.9rem;
+    }
+
+    .features {
+        grid-template-columns: 1fr;
+    }
+
+    .plan-options,
+    .membership-options {
+        grid-template-columns: 1fr;
+    }
+
+    .content-nav {
+        flex-direction: column;
+    }
+
+    .button-group {
+        flex-direction: column;
+    }
+
+    .alternative-actions {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .report-content {
+        padding: 1.5rem;
+    }
+
+    .report-header h1 {
+        font-size: 1.8rem;
+    }
+
+    .report-actions {
+        flex-direction: column;
+    }
+
+    .report-actions .btn-primary,
+    .report-actions .btn-secondary {
+        min-width: auto;
+        width: 100%;
+    }
+}

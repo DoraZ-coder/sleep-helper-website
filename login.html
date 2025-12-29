@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录/注册 - 睡眠助手</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .auth-container {
+            max-width: 450px;
+            margin: 60px auto;
+            padding: 20px;
+        }
+        .auth-box {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .tab-buttons {
+            display: flex;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #E0DED9;
+        }
+        .tab-btn {
+            flex: 1;
+            padding: 15px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            color: var(--secondary-text);
+            position: relative;
+        }
+        .tab-btn.active {
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+        .tab-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--primary-color);
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text-color);
+            font-size: 14px;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #E0DED9;
+            border-radius: 6px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+        .submit-btn {
+            width: 100%;
+            padding: 14px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .submit-btn:hover {
+            opacity: 0.9;
+        }
+        .submit-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        .error-message {
+            background: #FFF0F0;
+            color: #D32F2F;
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            display: none;
+        }
+        .success-message {
+            background: #F0FFF0;
+            color: #2E7D32;
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">睡眠助手</div>
+            <ul class="nav-links">
+                <li><a href="index.html">首页</a></li>
+                <li><a href="content.html">睡眠知识</a></li>
+                <li><a href="membership.html">会员</a></li>
+                <li><a href="about.html">关于我们</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <section>
+            <div class="container">
+                <div class="auth-container">
+                    <div class="auth-box">
+                        <div class="tab-buttons">
+                            <button class="tab-btn active" onclick="switchTab('login')">登录</button>
+                            <button class="tab-btn" onclick="switchTab('register')">注册</button>
+                        </div>
+
+                        <div id="errorMessage" class="error-message"></div>
+                        <div id="successMessage" class="success-message"></div>
+
+                        <!-- 登录表单 -->
+                        <form id="loginForm" style="display: block;">
+                            <div class="form-group">
+                                <label>邮箱</label>
+                                <input type="email" id="loginEmail" placeholder="请输入邮箱" required>
+                            </div>
+                            <div class="form-group">
+                                <label>密码</label>
+                                <input type="password" id="loginPassword" placeholder="请输入密码" required>
+                            </div>
+                            <button type="submit" class="submit-btn">登录</button>
+                        </form>
+
+                        <!-- 注册表单 -->
+                        <form id="registerForm" style="display: none;">
+                            <div class="form-group">
+                                <label>邮箱</label>
+                                <input type="email" id="registerEmail" placeholder="请输入邮箱" required>
+                            </div>
+                            <div class="form-group">
+                                <label>密码</label>
+                                <input type="password" id="registerPassword" placeholder="至少6位字符" required minlength="6">
+                            </div>
+                            <div class="form-group">
+                                <label>确认密码</label>
+                                <input type="password" id="registerPasswordConfirm" placeholder="请再次输入密码" required>
+                            </div>
+                            <button type="submit" class="submit-btn">注册</button>
+                        </form>
+
+                        <div style="text-align: center; margin-top: 20px; color: var(--secondary-text); font-size: 13px;">
+                            <p>注册即表示同意我们的服务条款</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 睡眠助手. 用心理解，科学助眠。</p>
+        </div>
+    </footer>
+
+    <script>
+        // 切换登录/注册标签
+        function switchTab(tab) {
+            const loginForm = document.getElementById('loginForm');
+            const registerForm = document.getElementById('registerForm');
+            const tabs = document.querySelectorAll('.tab-btn');
+
+            clearMessages();
+
+            if (tab === 'login') {
+                loginForm.style.display = 'block';
+                registerForm.style.display = 'none';
+                tabs[0].classList.add('active');
+                tabs[1].classList.remove('active');
+            } else {
+                loginForm.style.display = 'none';
+                registerForm.style.display = 'block';
+                tabs[0].classList.remove('active');
+                tabs[1].classList.add('active');
+            }
+        }
+
+        // 显示错误信息
+        function showError(message) {
+            const errorDiv = document.getElementById('errorMessage');
+            errorDiv.textContent = message;
+            errorDiv.style.display = 'block';
+            document.getElementById('successMessage').style.display = 'none';
+        }
+
+        // 显示成功信息
+        function showSuccess(message) {
+            const successDiv = document.getElementById('successMessage');
+            successDiv.textContent = message;
+            successDiv.style.display = 'block';
+            document.getElementById('errorMessage').style.display = 'none';
+        }
+
+        // 清除消息
+        function clearMessages() {
+            document.getElementById('errorMessage').style.display = 'none';
+            document.getElementById('successMessage').style.display = 'none';
+        }
+
+        // 登录表单提交
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            clearMessages();
+
+            const email = document.getElementById('loginEmail').value.trim();
+            const password = document.getElementById('loginPassword').value;
+
+            if (!email || !password) {
+                showError('请填写所有字段');
+                return;
+            }
+
+            try {
+                const response = await fetch('/api/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    // 保存登录状态
+                    localStorage.setItem('userEmail', email);
+                    localStorage.setItem('userToken', data.token);
+                    localStorage.setItem('isPurchased', data.isPurchased);
+
+                    showSuccess('登录成功！正在跳转...');
+
+                    // 跳转到结果页面或报告页面
+                    setTimeout(() => {
+                        const redirectTo = sessionStorage.getItem('loginRedirect') || 'result.html';
+                        sessionStorage.removeItem('loginRedirect');
+                        window.location.href = redirectTo;
+                    }, 1000);
+                } else {
+                    showError(data.error || '登录失败，请重试');
+                }
+            } catch (error) {
+                showError('网络错误，请检查连接');
+                console.error('Login error:', error);
+            }
+        });
+
+        // 注册表单提交
+        document.getElementById('registerForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            clearMessages();
+
+            const email = document.getElementById('registerEmail').value.trim();
+            const password = document.getElementById('registerPassword').value;
+            const passwordConfirm = document.getElementById('registerPasswordConfirm').value;
+
+            // 验证邮箱格式
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                showError('请输入有效的邮箱地址');
+                return;
+            }
+
+            // 验证密码长度
+            if (password.length < 6) {
+                showError('密码至少需要6位字符');
+                return;
+            }
+
+            // 验证密码一致
+            if (password !== passwordConfirm) {
+                showError('两次输入的密码不一致');
+                return;
+            }
+
+            try {
+                const response = await fetch('/api/register', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    showSuccess('注册成功！请登录');
+
+                    // 切换到登录表单并填充邮箱
+                    setTimeout(() => {
+                        switchTab('login');
+                        document.getElementById('loginEmail').value = email;
+                        document.getElementById('loginPassword').focus();
+                    }, 1500);
+                } else {
+                    showError(data.error || '注册失败，请重试');
+                }
+            } catch (error) {
+                showError('网络错误，请检查连接');
+                console.error('Register error:', error);
+            }
+        });
+
+        // 页面加载时检查登录状态
+        window.addEventListener('DOMContentLoaded', () => {
+            const userEmail = localStorage.getItem('userEmail');
+            const userToken = localStorage.getItem('userToken');
+
+            if (userEmail && userToken) {
+                // 已登录，询问是否继续登录
+                if (confirm('您已经登录为 ' + userEmail + '，是否继续使用该账号？')) {
+                    window.location.href = 'result.html';
+                } else {
+                    // 清除登录状态
+                    localStorage.removeItem('userEmail');
+                    localStorage.removeItem('userToken');
+                    localStorage.removeItem('isPurchased');
+                }
+            }
+        });
+    </script>
+</body>
+</html>

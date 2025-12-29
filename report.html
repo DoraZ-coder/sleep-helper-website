@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>完整睡眠分析报告 - 睡眠助手</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">睡眠助手</div>
+            <ul class="nav-links">
+                <li><a href="index.html">首页</a></li>
+                <li><a href="content.html">睡眠知识</a></li>
+                <li><a href="membership.html">会员</a></li>
+                <li><a href="about.html">关于我们</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <section class="full-report-section">
+            <div class="container-wide">
+                <div class="report-title-area">
+                    <h1 id="reportMainTitle">正在加载报告...</h1>
+                </div>
+
+                <!-- Tabs导航 -->
+                <div class="report-tabs">
+                    <button class="report-tab active" data-section="section1">你真正的样子</button>
+                    <button class="report-tab" data-section="section2">大脑机制</button>
+                    <button class="report-tab" data-section="section3">隐藏细节</button>
+                    <button class="report-tab" data-section="section4">类型对比</button>
+                    <button class="report-tab" data-section="section5">反直觉真相</button>
+                    <button class="report-tab" data-section="section6">改变方向</button>
+                    <button class="report-tab" data-section="section7">写给你</button>
+                </div>
+
+                <!-- 报告内容区 -->
+                <div class="report-main-content">
+                    <div id="reportFullContent">
+                        <p>正在为你生成个性化报告...</p>
+                    </div>
+
+                    <!-- 下一页按钮 -->
+                    <div class="report-navigation">
+                        <button class="btn-secondary" id="prevSection" style="display: none;">上一章</button>
+                        <button class="btn-primary" id="nextSection">下一章</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 睡眠助手. 用心理解，科学助眠。</p>
+        </div>
+    </footer>
+
+    <script src="js/report.js"></script>
+    <script>
+        // 在加载报告前检查购买状态
+        (async function checkAccess() {
+            const userToken = localStorage.getItem('userToken');
+            const isPurchased = localStorage.getItem('isPurchased');
+
+            // 检查登录状态
+            if (!userToken) {
+                alert('请先登录账号');
+                sessionStorage.setItem('loginRedirect', 'report.html');
+                window.location.href = 'login.html';
+                return;
+            }
+
+            // 先检查本地状态
+            if (isPurchased !== 'true') {
+                // 本地显示未购买，跳转到解锁页面
+                alert('请先解锁报告');
+                window.location.href = 'unlock-report.html';
+                return;
+            }
+
+            // 验证服务器端购买状态（可选，增强安全性）
+            try {
+                const response = await fetch('/api/check-purchase', {
+                    headers: {
+                        'Authorization': 'Bearer ' + userToken
+                    }
+                });
+
+                const data = await response.json();
+
+                if (!response.ok || !data.isPurchased) {
+                    // 服务器验证失败，清除本地状态
+                    localStorage.setItem('isPurchased', 'false');
+                    alert('购买状态异常，请重新解锁');
+                    window.location.href = 'unlock-report.html';
+                    return;
+                }
+
+                // 验证通过，正常显示报告
+            } catch (error) {
+                console.error('Check purchase error:', error);
+                // 网络错误时，暂时允许访问（基于本地状态）
+                console.warn('无法验证购买状态，使用本地缓存');
+            }
+        })();
+    </script>
+</body>
+</html>

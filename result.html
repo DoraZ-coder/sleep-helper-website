@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>评估结果 - 睡眠助手</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">睡眠助手</div>
+            <ul class="nav-links">
+                <li><a href="index.html">首页</a></li>
+                <li><a href="content.html">睡眠知识</a></li>
+                <li><a href="membership.html">会员</a></li>
+                <li><a href="about.html">关于我们</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <section class="result-section">
+            <div class="container">
+                <div class="result-header">
+                    <h1>你的睡眠评估结果</h1>
+                </div>
+
+                <div class="result-card">
+                    <div class="sleep-type">
+                        <h2 id="sleepType">正在分析...</h2>
+                        <div class="type-badge" id="typeBadge"></div>
+                    </div>
+
+                    <div class="result-description" id="resultDescription">
+                        <p>正在为你分析睡眠模式...</p>
+                    </div>
+
+                    <div class="next-step">
+                        <div class="cta-box">
+                            <button id="buyReportBtn" class="btn-primary large" onclick="handleBuyReport()">获取完整分析报告 ¥9.9</button>
+                        </div>
+
+                        <div class="alternative-actions">
+                            <a href="content.html" class="link-secondary">先了解一些睡眠知识</a>
+                            <a href="assessment.html" class="link-secondary">重新评估</a>
+                        </div>
+
+                        <!-- 用户信息显示 -->
+                        <div id="userInfo" style="margin-top: 20px; text-align: center; color: var(--secondary-text); font-size: 14px; display: none;">
+                            <p>当前登录：<span id="userEmail"></span> | <a href="#" onclick="logout()" style="color: var(--primary-color);">退出</a></p>
+                        </div>
+                    </div>
+
+                    <!-- 支付信息弹窗 -->
+                    <div id="paymentInfoModal" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+                         background: rgba(0,0,0,0.7); z-index: 9999; align-items: center; justify-content: center;">
+                        <div style="background: white; padding: 40px; border-radius: 12px; max-width: 600px; text-align: center;
+                                    max-height: 90vh; overflow-y: auto;">
+                            <h2 style="margin-bottom: 20px; color: var(--text-color);">获取完整报告</h2>
+
+                            <div style="background: #FFF9E6; padding: 20px; border-radius: 8px; margin: 20px 0; text-align: left;">
+                                <h3 style="margin-top: 0; color: var(--text-color); font-size: 16px;">📝 购买流程：</h3>
+                                <ol style="margin: 10px 0; padding-left: 20px; color: var(--text-color); line-height: 1.8;">
+                                    <li>扫描下方收款码支付 ¥9.9</li>
+                                    <li>添加微信（见下方二维码）</li>
+                                    <li>发送付款截图</li>
+                                    <li>获取访问密码</li>
+                                    <li>输入密码查看完整报告</li>
+                                </ol>
+                            </div>
+
+                            <div style="display: flex; gap: 30px; justify-content: center; margin: 30px 0; flex-wrap: wrap;">
+                                <!-- 收款码 -->
+                                <div>
+                                    <h3 style="color: var(--text-color); font-size: 14px; margin-bottom: 10px;">① 扫码支付 ¥9.9</h3>
+                                    <div style="width: 200px; height: 200px; border: 2px solid #E0DED9; border-radius: 8px;
+                                                display: flex; align-items: center; justify-content: center; background: #F9F9F9;">
+                                        <img id="paymentQRCode" src="" alt="收款码" style="max-width: 100%; max-height: 100%;">
+                                        <p style="color: #999; font-size: 12px; margin: 0;" id="qrcodePlaceholder">请在下方设置收款码</p>
+                                    </div>
+                                </div>
+
+                                <!-- 微信二维码 -->
+                                <div>
+                                    <h3 style="color: var(--text-color); font-size: 14px; margin-bottom: 10px;">② 添加微信获取密码</h3>
+                                    <div style="width: 200px; height: 200px; border: 2px solid #E0DED9; border-radius: 8px;
+                                                display: flex; align-items: center; justify-content: center; background: #F9F9F9;">
+                                        <img id="wechatQRCode" src="" alt="微信二维码" style="max-width: 100%; max-height: 100%;">
+                                        <p style="color: #999; font-size: 12px; margin: 0;" id="wechatPlaceholder">请在下方设置微信二维码</p>
+                                    </div>
+                                    <p id="wechatIdText" style="color: var(--secondary-text); font-size: 12px; margin-top: 8px;"></p>
+                                </div>
+                            </div>
+
+                            <div style="background: #FFF0F0; padding: 15px; border-radius: 8px; margin: 20px 0; text-align: left;">
+                                <p style="margin: 0; color: #D32F2F; font-size: 13px;">
+                                    ⚠️ 注意：付款后请务必添加微信并发送付款截图，否则无法获取访问密码
+                                </p>
+                            </div>
+
+                            <div style="margin-top: 20px;">
+                                <button onclick="closePaymentModal()" style="padding: 10px 30px; background: var(--primary-color);
+                                        color: white; border: none; border-radius: 6px; cursor: pointer; margin-right: 10px;">
+                                    我已添加微信
+                                </button>
+                                <button onclick="goToPasswordPage()" style="padding: 10px 30px; background: white;
+                                        color: var(--primary-color); border: 1px solid var(--primary-color); border-radius: 6px; cursor: pointer;">
+                                    已有密码，立即输入
+                                </button>
+                            </div>
+
+                            <p style="margin-top: 15px;">
+                                <a href="javascript:void(0)" onclick="closePaymentModal()"
+                                   style="color: var(--secondary-text); font-size: 14px; text-decoration: none;">
+                                    取消
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 睡眠助手. 用心理解，科学助眠。</p>
+        </div>
+    </footer>
+
+    <script src="js/result.js"></script>
+    <script>
+        // ========== 在这里设置你的收款码和微信二维码 ==========
+        const PAYMENT_QRCODE = 'images/payment-qrcode.png';  // 你的收款码图片路径（支持jpg/jpeg/png）
+        const WECHAT_QRCODE = 'images/wechat-qrcode.png';    // 你的微信二维码图片路径（支持jpg/jpeg/png）
+        const WECHAT_ID = 'your_wechat_id';                   // 你的微信号（可选）
+
+        // 显示支付信息弹窗
+        function showPaymentInfo() {
+            const modal = document.getElementById('paymentInfoModal');
+            modal.style.display = 'flex';
+
+            // 设置收款码
+            const paymentQR = document.getElementById('paymentQRCode');
+            const qrPlaceholder = document.getElementById('qrcodePlaceholder');
+            if (PAYMENT_QRCODE && !PAYMENT_QRCODE.includes('payment-qrcode.')) {
+                // 用户已设置自己的图片路径
+                paymentQR.src = PAYMENT_QRCODE;
+                paymentQR.style.display = 'block';
+                qrPlaceholder.style.display = 'none';
+            } else if (PAYMENT_QRCODE.endsWith('.png') || PAYMENT_QRCODE.endsWith('.jpg') || PAYMENT_QRCODE.endsWith('.jpeg')) {
+                // 检查默认文件是否存在
+                paymentQR.src = PAYMENT_QRCODE;
+                paymentQR.onerror = function() {
+                    paymentQR.style.display = 'none';
+                    qrPlaceholder.style.display = 'block';
+                    qrPlaceholder.innerHTML = '请将收款码图片<br>放到images文件夹<br>支持jpg/png格式';
+                };
+                paymentQR.style.display = 'block';
+                qrPlaceholder.style.display = 'none';
+            } else {
+                paymentQR.style.display = 'none';
+                qrPlaceholder.style.display = 'block';
+                qrPlaceholder.innerHTML = '请在result.html中<br>设置PAYMENT_QRCODE';
+            }
+
+            // 设置微信二维码
+            const wechatQR = document.getElementById('wechatQRCode');
+            const wechatPlaceholder = document.getElementById('wechatPlaceholder');
+            if (WECHAT_QRCODE && !WECHAT_QRCODE.includes('wechat-qrcode.')) {
+                // 用户已设置自己的图片路径
+                wechatQR.src = WECHAT_QRCODE;
+                wechatQR.style.display = 'block';
+                wechatPlaceholder.style.display = 'none';
+            } else if (WECHAT_QRCODE.endsWith('.png') || WECHAT_QRCODE.endsWith('.jpg') || WECHAT_QRCODE.endsWith('.jpeg')) {
+                // 检查默认文件是否存在
+                wechatQR.src = WECHAT_QRCODE;
+                wechatQR.onerror = function() {
+                    wechatQR.style.display = 'none';
+                    wechatPlaceholder.style.display = 'block';
+                    wechatPlaceholder.innerHTML = '请将微信二维码<br>放到images文件夹<br>支持jpg/png格式';
+                };
+                wechatQR.style.display = 'block';
+                wechatPlaceholder.style.display = 'none';
+            } else {
+                wechatQR.style.display = 'none';
+                wechatPlaceholder.style.display = 'block';
+                wechatPlaceholder.innerHTML = '请在result.html中<br>设置WECHAT_QRCODE';
+            }
+
+            // 设置微信号文本
+            const wechatText = document.getElementById('wechatIdText');
+            if (WECHAT_ID && WECHAT_ID !== 'your_wechat_id') {
+                wechatText.textContent = '微信号: ' + WECHAT_ID;
+            } else {
+                wechatText.textContent = '';
+            }
+        }
+
+        // 关闭弹窗
+        function closePaymentModal() {
+            const modal = document.getElementById('paymentInfoModal');
+            modal.style.display = 'none';
+        }
+
+        // 跳转到密码输入页
+        function goToPasswordPage() {
+            window.location.href = 'unlock-report.html';
+        }
+
+        // 处理购买报告按钮点击
+        function handleBuyReport() {
+            // 检查是否登录
+            const userEmail = localStorage.getItem('userEmail');
+            const userToken = localStorage.getItem('userToken');
+
+            if (!userEmail || !userToken) {
+                // 未登录，跳转到登录页
+                if (confirm('购买报告需要先登录账号，是否前往登录？')) {
+                    sessionStorage.setItem('loginRedirect', 'result.html');
+                    window.location.href = 'login.html';
+                }
+                return;
+            }
+
+            // 检查是否已购买
+            const isPurchased = localStorage.getItem('isPurchased');
+            if (isPurchased === 'true') {
+                // 已购买，直接跳转到报告
+                if (confirm('您已经购买过报告，是否直接查看？')) {
+                    window.location.href = 'report.html';
+                }
+                return;
+            }
+
+            // 显示支付信息
+            showPaymentInfo();
+        }
+
+        // 退出登录
+        function logout() {
+            if (confirm('确定要退出登录吗？')) {
+                localStorage.removeItem('userEmail');
+                localStorage.removeItem('userToken');
+                localStorage.removeItem('isPurchased');
+                location.reload();
+            }
+        }
+
+        // 页面加载时检查登录状态
+        window.addEventListener('DOMContentLoaded', () => {
+            const userEmail = localStorage.getItem('userEmail');
+            const userToken = localStorage.getItem('userToken');
+            const isPurchased = localStorage.getItem('isPurchased');
+
+            if (userEmail && userToken) {
+                // 已登录，显示用户信息
+                document.getElementById('userInfo').style.display = 'block';
+                document.getElementById('userEmail').textContent = userEmail;
+
+                // 如果已购买，修改按钮文字
+                if (isPurchased === 'true') {
+                    document.getElementById('buyReportBtn').textContent = '查看完整报告';
+                }
+            }
+        });
+    </script>
+</body>
+</html>
