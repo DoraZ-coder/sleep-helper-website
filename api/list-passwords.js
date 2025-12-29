@@ -1,4 +1,4 @@
-import { kv } from '@vercel/kv';
+import { getRedis } from './_redis.js';
 
 export default async function handler(req, res) {
     // 只允许GET请求
@@ -28,14 +28,16 @@ export default async function handler(req, res) {
             });
         }
 
+        const redis = getRedis();
+
         // 获取所有密码键
-        const keys = await kv.keys('password:*');
+        const keys = await redis.keys('password:*');
 
         const passwords = [];
 
         // 获取每个密码的详细信息
         for (const key of keys) {
-            const passwordDataStr = await kv.get(key);
+            const passwordDataStr = await redis.get(key);
             if (passwordDataStr) {
                 const passwordData = JSON.parse(passwordDataStr);
                 passwords.push(passwordData);

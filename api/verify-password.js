@@ -1,4 +1,4 @@
-import { kv } from '@vercel/kv';
+import { getRedis } from './_redis.js';
 
 export default async function handler(req, res) {
     // 只允许POST请求
@@ -14,14 +14,16 @@ export default async function handler(req, res) {
             return res.status(400).json({ error: '密码和登录凭证不能为空' });
         }
 
+        const redis = getRedis();
+
         // 验证用户登录状态
-        const userEmail = await kv.get(`token:${token}`);
+        const userEmail = await redis.get(`token:${token}`);
         if (!userEmail) {
             return res.status(401).json({ error: '请先登录' });
         }
 
         // 获取用户数据
-        const userDataStr = await kv.get(`user:${userEmail}`);
+        const userDataStr = await redis.get(`user:${userEmail}`);
         if (!userDataStr) {
             return res.status(404).json({ error: '用户不存在' });
         }
@@ -39,7 +41,7 @@ export default async function handler(req, res) {
 
         // 验证密码是否存在
         const passwordCode = password.trim().toUpperCase();
-        const passwordDataStr = await kv.get(`password:${passwordCode}`);
+        const passwordDataStr = await redis.get(`password:${passwordCode}`);
 
         if (!passwordDataStr) {
             return res.status(400).json({ error: '密码不存在或已失效' });
@@ -60,13 +62,13 @@ export default async function handler(req, res) {
         passwordData.used = true;
         passwordData.usedBy = userEmail;
         passwordData.usedAt = new Date().toISOString();
-        await kv.set(`password:${passwordCode}`, JSON.stringify(passwordData));
+        await redis.set(`password:${passwordCode}`, JSON.stringify(passwordData));
 
         // 更新用户购买状态
         userData.isPurchased = true;
         userData.purchasedAt = new Date().toISOString();
         userData.usedPassword = passwordCode;
-        await kv.set(`user:${userEmail}`, JSON.stringify(userData));
+        await redis.set(`user:${userEmail}`, JSON.stringify(userData));
 
         // 返回成功
         return res.status(200).json({

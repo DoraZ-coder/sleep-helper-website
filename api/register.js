@@ -1,4 +1,4 @@
-import { kv } from '@vercel/kv';
+import { getRedis } from './_redis.js';
 import crypto from 'crypto';
 
 export default async function handler(req, res) {
@@ -26,8 +26,10 @@ export default async function handler(req, res) {
             return res.status(400).json({ error: '密码至少需要6位字符' });
         }
 
+        const redis = getRedis();
+
         // 检查用户是否已存在
-        const existingUser = await kv.get(`user:${email}`);
+        const existingUser = await redis.get(`user:${email}`);
         if (existingUser) {
             return res.status(400).json({ error: '该邮箱已被注册' });
         }
@@ -48,7 +50,7 @@ export default async function handler(req, res) {
         };
 
         // 保存到数据库
-        await kv.set(`user:${email}`, JSON.stringify(userData));
+        await redis.set(`user:${email}`, JSON.stringify(userData));
 
         // 返回成功
         return res.status(201).json({

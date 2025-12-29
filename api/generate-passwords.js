@@ -1,4 +1,4 @@
-import { kv } from '@vercel/kv';
+import { getRedis } from './_redis.js';
 
 // 生成随机字符串
 function generateRandomString(length) {
@@ -30,6 +30,7 @@ export default async function handler(req, res) {
             return res.status(400).json({ error: '数量必须在1-100之间' });
         }
 
+        const redis = getRedis();
         const passwords = [];
 
         for (let i = 0; i < count; i++) {
@@ -46,7 +47,7 @@ export default async function handler(req, res) {
             };
 
             // 保存到数据库
-            await kv.set(`password:${passwordCode}`, JSON.stringify(passwordData));
+            await redis.set(`password:${passwordCode}`, JSON.stringify(passwordData));
 
             passwords.push(passwordCode);
         }

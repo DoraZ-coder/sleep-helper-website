@@ -1,4 +1,4 @@
-import { kv } from '@vercel/kv';
+import { getRedis } from './_redis.js';
 import crypto from 'crypto';
 
 export default async function handler(req, res) {
@@ -15,8 +15,10 @@ export default async function handler(req, res) {
             return res.status(400).json({ error: '邮箱和密码不能为空' });
         }
 
+        const redis = getRedis();
+
         // 获取用户数据
-        const userDataStr = await kv.get(`user:${email}`);
+        const userDataStr = await redis.get(`user:${email}`);
         if (!userDataStr) {
             return res.status(401).json({ error: '邮箱或密码错误' });
         }
@@ -36,15 +38,15 @@ export default async function handler(req, res) {
         // 生成token（简单版本：email + 时间戳的hash）
         const token = crypto
             .createHash('sha256')
-            .update(email + Date.now() + process.env.JWT_SECRET || 'sleep-helper-secret')
+            .update(email + Date.now() + (process.env.JWT_SECRET || 'sleep-helper-secret'))
             .digest('hex');
 
         // 更新最后登录时间
         userData.lastLoginAt = new Date().toISOString();
-        await kv.set(`user:${email}`, JSON.stringify(userData));
+        await redis.set(`user:${email}`, JSON.stringify(userData));
 
-        // 保存token
-        await kv.set(`token:${token}`, email, { ex: 60 * 60 * 24 * 30 }); // 30天过期
+        // 保存token (ioredis的setex方法)
+        await redis.setex(`token:${token}`, 60 * 60 * 24 * 30, email); // 30天过期
 
         // 返回成功
         return res.status(200).json({
