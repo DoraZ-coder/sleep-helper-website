@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>用户管理 - 睡眠助手</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .admin-container {
+            max-width: 1400px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+        .login-box {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            max-width: 400px;
+            margin: 60px auto;
+        }
+        .users-container {
+            display: none;
+        }
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .stats-summary {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        .stat-box {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .stat-box h3 {
+            color: var(--secondary-text);
+            font-size: 14px;
+            margin-bottom: 8px;
+            font-weight: normal;
+        }
+        .stat-box .value {
+            color: var(--primary-color);
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .users-table {
+            background: white;
+            padding: 24px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            overflow-x: auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 900px;
+        }
+        table th, table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #E0DED9;
+        }
+        table th {
+            background: #F5F3EF;
+            color: var(--text-color);
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+        }
+        table tr:hover {
+            background: #F9F8F6;
+        }
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        .badge-success {
+            background: #E8F5E9;
+            color: #2E7D32;
+        }
+        .badge-default {
+            background: #F5F3EF;
+            color: var(--secondary-text);
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text-color);
+            font-size: 14px;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #E0DED9;
+            border-radius: 6px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+        .submit-btn {
+            width: 100%;
+            padding: 14px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .submit-btn:hover {
+            opacity: 0.9;
+        }
+        .error-message {
+            background: #FFF0F0;
+            color: #D32F2F;
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            display: none;
+        }
+        .refresh-btn {
+            padding: 10px 20px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        .refresh-btn:hover {
+            opacity: 0.9;
+        }
+        .search-box {
+            margin-bottom: 20px;
+        }
+        .search-box input {
+            width: 100%;
+            max-width: 400px;
+            padding: 12px;
+            border: 1px solid #E0DED9;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+        .updated-time {
+            color: var(--secondary-text);
+            font-size: 12px;
+            text-align: right;
+            margin-top: 10px;
+        }
+        .no-data {
+            text-align: center;
+            padding: 40px;
+            color: var(--secondary-text);
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">睡眠助手 - 用户管理</div>
+            <ul class="nav-links">
+                <li><a href="admin.html">管理首页</a></li>
+                <li><a href="admin-statistics.html">数据统计</a></li>
+                <li><a href="admin-password.html">密码管理</a></li>
+                <li><a href="#" onclick="logout(); return false;">退出</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <!-- 登录框 -->
+        <div id="loginBox" class="login-box">
+            <h2 style="text-align: center; margin-bottom: 30px;">用户管理后台</h2>
+            <div id="errorMessage" class="error-message"></div>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label>管理员密钥</label>
+                    <input type="password" id="adminKey" placeholder="请输入管理员密钥" required>
+                </div>
+                <button type="submit" class="submit-btn">登录</button>
+            </form>
+        </div>
+
+        <!-- 用户列表容器 -->
+        <div id="usersContainer" class="users-container">
+            <div class="admin-container">
+                <div class="section-header">
+                    <h1>用户管理</h1>
+                    <button class="refresh-btn" onclick="loadUsers()">刷新数据</button>
+                </div>
+
+                <!-- 统计摘要 -->
+                <div class="stats-summary">
+                    <div class="stat-box">
+                        <h3>总用户数</h3>
+                        <div class="value" id="totalUsers">0</div>
+                    </div>
+                    <div class="stat-box">
+                        <h3>已付费用户</h3>
+                        <div class="value" id="paidUsers">0</div>
+                    </div>
+                    <div class="stat-box">
+                        <h3>未付费用户</h3>
+                        <div class="value" id="unpaidUsers">0</div>
+                    </div>
+                    <div class="stat-box">
+                        <h3>付费转化率</h3>
+                        <div class="value" id="conversionRate">0%</div>
+                    </div>
+                </div>
+
+                <!-- 搜索框 -->
+                <div class="search-box">
+                    <input type="text" id="searchInput" placeholder="搜索邮箱..." onkeyup="filterUsers()">
+                </div>
+
+                <!-- 用户表格 -->
+                <div class="users-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>邮箱</th>
+                                <th>注册时间</th>
+                                <th>最后登录</th>
+                                <th>付费状态</th>
+                                <th>付费时间</th>
+                                <th>使用密码</th>
+                            </tr>
+                        </thead>
+                        <tbody id="usersTableBody">
+                            <tr>
+                                <td colspan="6" class="no-data">加载中...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="updated-time" id="updatedTime">-</div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 睡眠助手. 用心理解，科学助眠。</p>
+        </div>
+    </footer>
+
+    <script>
+        let adminKey = '';
+        let allUsers = [];
+
+        // 显示错误信息
+        function showError(message) {
+            const errorDiv = document.getElementById('errorMessage');
+            errorDiv.textContent = message;
+            errorDiv.style.display = 'block';
+        }
+
+        // 登录表单提交
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const key = document.getElementById('adminKey').value.trim();
+
+            if (!key) {
+                showError('请输入管理员密钥');
+                return;
+            }
+
+            adminKey = key;
+
+            // 尝试加载数据来验证密钥
+            const success = await loadUsers();
+            if (success) {
+                // 登录成功，显示用户列表
+                document.getElementById('loginBox').style.display = 'none';
+                document.getElementById('usersContainer').style.display = 'block';
+            }
+        });
+
+        // 加载用户列表
+        async function loadUsers() {
+            try {
+                const response = await fetch('/api/list-users', {
+                    headers: {
+                        'X-Admin-Key': adminKey
+                    }
+                });
+
+                const result = await response.json();
+
+                if (!response.ok) {
+                    showError(result.error || '加载失败');
+                    return false;
+                }
+
+                allUsers = result.users;
+
+                // 更新统计数据
+                const totalUsers = result.total;
+                const paidUsers = allUsers.filter(u => u.isPurchased).length;
+                const unpaidUsers = totalUsers - paidUsers;
+                const conversionRate = totalUsers > 0 ? ((paidUsers / totalUsers) * 100).toFixed(2) : 0;
+
+                document.getElementById('totalUsers').textContent = totalUsers;
+                document.getElementById('paidUsers').textContent = paidUsers;
+                document.getElementById('unpaidUsers').textContent = unpaidUsers;
+                document.getElementById('conversionRate').textContent = conversionRate + '%';
+
+                // 渲染用户列表
+                renderUsers(allUsers);
+
+                // 更新时间
+                document.getElementById('updatedTime').textContent = `更新时间: ${new Date().toLocaleString('zh-CN')}`;
+
+                return true;
+
+            } catch (error) {
+                console.error('Load users error:', error);
+                showError('网络错误，请检查连接');
+                return false;
+            }
+        }
+
+        // 渲染用户列表
+        function renderUsers(users) {
+            const tbody = document.getElementById('usersTableBody');
+
+            if (users.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="6" class="no-data">暂无用户数据</td></tr>';
+                return;
+            }
+
+            tbody.innerHTML = '';
+            users.forEach(user => {
+                const row = document.createElement('tr');
+
+                const createdAt = user.createdAt ? new Date(user.createdAt).toLocaleString('zh-CN') : '-';
+                const lastLoginAt = user.lastLoginAt ? new Date(user.lastLoginAt).toLocaleString('zh-CN') : '-';
+                const purchasedAt = user.purchasedAt ? new Date(user.purchasedAt).toLocaleString('zh-CN') : '-';
+                const usedPassword = user.usedPassword || '-';
+
+                const statusBadge = user.isPurchased
+                    ? '<span class="badge badge-success">已付费</span>'
+                    : '<span class="badge badge-default">未付费</span>';
+
+                row.innerHTML = `
+                    <td>${user.email}</td>
+                    <td>${createdAt}</td>
+                    <td>${lastLoginAt}</td>
+                    <td>${statusBadge}</td>
+                    <td>${user.isPurchased ? purchasedAt : '-'}</td>
+                    <td>${user.isPurchased ? usedPassword : '-'}</td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        // 搜索过滤
+        function filterUsers() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const filtered = allUsers.filter(user =>
+                user.email.toLowerCase().includes(searchTerm)
+            );
+            renderUsers(filtered);
+        }
+
+        // 退出登录
+        function logout() {
+            if (confirm('确定要退出吗？')) {
+                adminKey = '';
+                allUsers = [];
+                document.getElementById('loginBox').style.display = 'block';
+                document.getElementById('usersContainer').style.display = 'none';
+                document.getElementById('adminKey').value = '';
+                document.getElementById('errorMessage').style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
