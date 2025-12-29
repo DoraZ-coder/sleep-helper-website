@@ -308,7 +308,7 @@
         // 加载统计数据
         async function loadStatistics() {
             try {
-                const response = await fetch('/api/statistics', {
+                const response = await fetch('/api/admin?action=statistics', {
                     headers: {
                         'X-Admin-Key': adminKey
                     }

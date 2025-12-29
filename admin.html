@@ -229,7 +229,7 @@
 
             // 验证密钥（通过调用统计API）
             try {
-                const response = await fetch('/api/statistics', {
+                const response = await fetch('/api/admin?action=statistics', {
                     headers: { 'X-Admin-Key': key }
                 });
 
@@ -265,7 +265,7 @@
             if (savedKey) {
                 // 验证保存的密钥是否仍然有效
                 try {
-                    const response = await fetch('/api/statistics', {
+                    const response = await fetch('/api/admin?action=statistics', {
                         headers: { 'X-Admin-Key': savedKey }
                     });
 

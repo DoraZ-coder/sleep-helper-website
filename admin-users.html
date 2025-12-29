@@ -296,7 +296,7 @@
         // 加载用户列表
         async function loadUsers() {
             try {
-                const response = await fetch('/api/list-users', {
+                const response = await fetch('/api/admin?action=list-users', {
                     headers: {
                         'X-Admin-Key': adminKey
                     }
