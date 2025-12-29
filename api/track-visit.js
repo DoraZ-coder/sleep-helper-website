@@ -17,6 +17,18 @@ export default async function handler(req, res) {
         const today = new Date().toISOString().split('T')[0]; // YYYY-MM-DD
         const timestamp = new Date().toISOString();
 
+        // 检查是否是新访客（首次访问）
+        const firstVisitDate = await redis.get(`visitor:${visitorId}`);
+        if (!firstVisitDate) {
+            // 新访客，记录首次访问日期
+            await redis.set(`visitor:${visitorId}`, today);
+            await redis.expire(`visitor:${visitorId}`, 365 * 24 * 60 * 60); // 1年过期
+
+            // 将新访客添加到今日新增集合
+            await redis.sadd(`new_visitor:${today}`, visitorId);
+            await redis.expire(`new_visitor:${today}`, 90 * 24 * 60 * 60);
+        }
+
         // 记录访问日志: visit:YYYY-MM-DD -> Set of visitorIds
         await redis.sadd(`visit:${today}`, visitorId);
 

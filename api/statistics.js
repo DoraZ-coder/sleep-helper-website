@@ -30,8 +30,15 @@ export default async function handler(req, res) {
         // 昨日UV
         const yesterdayUV = await redis.scard(`visit:${yesterday}`) || 0;
 
-        // ============ 2. 用户数据 ============
-        // 获取所有用户
+        // ============ 2. 访客数据（新增） ============
+        // 今日新增访客数（首次访问）
+        const todayNewVisitors = await redis.scard(`new_visitor:${today}`) || 0;
+
+        // 昨日新增访客数
+        const yesterdayNewVisitors = await redis.scard(`new_visitor:${yesterday}`) || 0;
+
+        // ============ 3. 注册用户数据 ============
+        // 获取所有注册用户
         const userKeys = await redis.keys('user:*');
         const users = [];
 
@@ -47,70 +54,70 @@ export default async function handler(req, res) {
             }
         }
 
-        // 总用户数
+        // 总注册用户数
         const totalUsers = users.length;
 
-        // 今日新增用户数
-        const todayNewUsers = users.filter(user => {
+        // 今日注册用户数
+        const todayRegisteredUsers = users.filter(user => {
             if (!user.createdAt) return false;
             const createdDate = user.createdAt.split('T')[0];
             return createdDate === today;
         }).length;
 
-        // 昨日新增用户数
-        const yesterdayNewUsers = users.filter(user => {
-            if (!user.createdAt) return false;
-            const createdDate = user.createdAt.split('T')[0];
-            return createdDate === yesterday;
-        }).length;
-
-        // 7天前新增用户数
-        const sevenDaysAgoNewUsers = users.filter(user => {
-            if (!user.createdAt) return false;
-            const createdDate = user.createdAt.split('T')[0];
-            return createdDate === sevenDaysAgo;
-        }).length;
-
-        // ============ 3. 注册转化率 ============
-        // 注册转化率 = 今日新增用户数 / 今日UV
-        const registrationRate = todayUV > 0 ? ((todayNewUsers / todayUV) * 100).toFixed(2) : 0;
-
-        // ============ 4. 留存率 ============
-        // 次日留存率：昨日注册的用户中，今天登录过的比例
+        // 昨日注册用户数
         const yesterdayRegisteredUsers = users.filter(user => {
             if (!user.createdAt) return false;
             const createdDate = user.createdAt.split('T')[0];
             return createdDate === yesterday;
+        }).length;
+
+        // 7天前注册用户数
+        const sevenDaysAgoRegisteredUsers = users.filter(user => {
+            if (!user.createdAt) return false;
+            const createdDate = user.createdAt.split('T')[0];
+            return createdDate === sevenDaysAgo;
+        }).length;
+
+        // ============ 4. 注册转化率 ============
+        // 注册转化率 = 今日注册用户数 / 今日UV × 100%
+        const registrationRate = todayUV > 0 ? ((todayRegisteredUsers / todayUV) * 100).toFixed(2) : 0;
+
+        // ============ 5. 留存率 ============
+        // 次日留存率：昨日注册的用户中，今天登录过的比例
+        const yesterdayRegisteredUsersList = users.filter(user => {
+            if (!user.createdAt) return false;
+            const createdDate = user.createdAt.split('T')[0];
+            return createdDate === yesterday;
         });
 
-        const yesterdayRetainedUsers = yesterdayRegisteredUsers.filter(user => {
+        const yesterdayRetainedUsers = yesterdayRegisteredUsersList.filter(user => {
             if (!user.lastLoginAt) return false;
             const lastLoginDate = user.lastLoginAt.split('T')[0];
             return lastLoginDate === today;
         }).length;
 
-        const nextDayRetention = yesterdayRegisteredUsers.length > 0
-            ? ((yesterdayRetainedUsers / yesterdayRegisteredUsers.length) * 100).toFixed(2)
+        const nextDayRetention = yesterdayRegisteredUsersList.length > 0
+            ? ((yesterdayRetainedUsers / yesterdayRegisteredUsersList.length) * 100).toFixed(2)
             : 0;
 
         // 7日留存率：7天前注册的用户中，今天登录过的比例
-        const sevenDaysAgoRegisteredUsers = users.filter(user => {
+        const sevenDaysAgoRegisteredUsersList = users.filter(user => {
             if (!user.createdAt) return false;
             const createdDate = user.createdAt.split('T')[0];
             return createdDate === sevenDaysAgo;
         });
 
-        const sevenDaysRetainedUsers = sevenDaysAgoRegisteredUsers.filter(user => {
+        const sevenDaysRetainedUsers = sevenDaysAgoRegisteredUsersList.filter(user => {
             if (!user.lastLoginAt) return false;
             const lastLoginDate = user.lastLoginAt.split('T')[0];
             return lastLoginDate === today;
         }).length;
 
-        const sevenDayRetention = sevenDaysAgoRegisteredUsers.length > 0
-            ? ((sevenDaysRetainedUsers / sevenDaysAgoRegisteredUsers.length) * 100).toFixed(2)
+        const sevenDayRetention = sevenDaysAgoRegisteredUsersList.length > 0
+            ? ((sevenDaysRetainedUsers / sevenDaysAgoRegisteredUsersList.length) * 100).toFixed(2)
             : 0;
 
-        // ============ 5. 付费数据 ============
+        // ============ 6. 付费数据 ============
         // 已付费用户数
         const paidUsers = users.filter(user => user.isPurchased === true).length;
 
@@ -124,7 +131,7 @@ export default async function handler(req, res) {
             return purchasedDate === today;
         }).length;
 
-        // ============ 6. 近7日趋势数据 ============
+        // ============ 7. 近7日趋势数据 ============
         const last7Days = [];
         for (let i = 6; i >= 0; i--) {
             const date = new Date(Date.now() - i * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
@@ -132,8 +139,11 @@ export default async function handler(req, res) {
             // 该日UV
             const uv = await redis.scard(`visit:${date}`) || 0;
 
-            // 该日新增用户
-            const newUsers = users.filter(user => {
+            // 该日新增访客数（首次访问）
+            const newVisitors = await redis.scard(`new_visitor:${date}`) || 0;
+
+            // 该日注册用户数
+            const newRegistrations = users.filter(user => {
                 if (!user.createdAt) return false;
                 const createdDate = user.createdAt.split('T')[0];
                 return createdDate === date;
@@ -149,7 +159,8 @@ export default async function handler(req, res) {
             last7Days.push({
                 date,
                 uv,
-                newUsers,
+                newVisitors,
+                newRegistrations,
                 newPaidUsers
             });
         }
@@ -162,14 +173,16 @@ export default async function handler(req, res) {
                 visit: {
                     todayUV,
                     todayPV: todayPVCount,
-                    yesterdayUV
+                    yesterdayUV,
+                    todayNewVisitors,
+                    yesterdayNewVisitors
                 },
-                // 用户数据
+                // 注册用户数据
                 user: {
                     total: totalUsers,
-                    todayNew: todayNewUsers,
-                    yesterdayNew: yesterdayNewUsers,
-                    sevenDaysAgoNew: sevenDaysAgoNewUsers
+                    todayRegistered: todayRegisteredUsers,
+                    yesterdayRegistered: yesterdayRegisteredUsers,
+                    sevenDaysAgoRegistered: sevenDaysAgoRegisteredUsers
                 },
                 // 转化率
                 conversion: {
@@ -181,11 +194,11 @@ export default async function handler(req, res) {
                     nextDay: nextDayRetention + '%',
                     sevenDay: sevenDayRetention + '%',
                     nextDayDetail: {
-                        base: yesterdayRegisteredUsers.length,
+                        base: yesterdayRegisteredUsersList.length,
                         retained: yesterdayRetainedUsers
                     },
                     sevenDayDetail: {
-                        base: sevenDaysAgoRegisteredUsers.length,
+                        base: sevenDaysAgoRegisteredUsersList.length,
                         retained: sevenDaysRetainedUsers
                     }
                 },

@@ -199,8 +199,13 @@
                         <div class="label">累计注册用户</div>
                     </div>
                     <div class="stat-card">
-                        <h3>今日新增</h3>
-                        <div class="value" id="todayNewUsers">-</div>
+                        <h3>日新增访客</h3>
+                        <div class="value" id="todayNewVisitors">-</div>
+                        <div class="label">首次访问用户</div>
+                    </div>
+                    <div class="stat-card">
+                        <h3>今日注册</h3>
+                        <div class="value" id="todayRegistered">-</div>
                         <div class="label">新注册用户</div>
                     </div>
                     <div class="stat-card">
@@ -243,13 +248,14 @@
                             <tr>
                                 <th>日期</th>
                                 <th>UV</th>
-                                <th>新增用户</th>
+                                <th>新增访客</th>
+                                <th>注册用户</th>
                                 <th>新增付费</th>
                             </tr>
                         </thead>
                         <tbody id="trendsTableBody">
                             <tr>
-                                <td colspan="4" style="text-align: center; color: var(--secondary-text);">加载中...</td>
+                                <td colspan="5" style="text-align: center; color: var(--secondary-text);">加载中...</td>
                             </tr>
                         </tbody>
                     </table>
@@ -319,10 +325,11 @@
                 // 访问数据
                 document.getElementById('todayUV').textContent = data.visit.todayUV;
                 document.getElementById('todayPV').textContent = data.visit.todayPV;
+                document.getElementById('todayNewVisitors').textContent = data.visit.todayNewVisitors;
 
                 // 用户数据
                 document.getElementById('totalUsers').textContent = data.user.total;
-                document.getElementById('todayNewUsers').textContent = data.user.todayNew;
+                document.getElementById('todayRegistered').textContent = data.user.todayRegistered;
 
                 // 转化率
                 document.getElementById('registrationRate').textContent = data.conversion.registrationRate;
@@ -349,7 +356,8 @@
                     row.innerHTML = `
                         <td>${trend.date}</td>
                         <td>${trend.uv}</td>
-                        <td class="${trend.newUsers > 0 ? 'highlight' : ''}">${trend.newUsers}</td>
+                        <td class="${trend.newVisitors > 0 ? 'highlight' : ''}">${trend.newVisitors}</td>
+                        <td class="${trend.newRegistrations > 0 ? 'highlight' : ''}">${trend.newRegistrations}</td>
                         <td class="${trend.newPaidUsers > 0 ? 'highlight' : ''}">${trend.newPaidUsers}</td>
                     `;
                     tbody.appendChild(row);
