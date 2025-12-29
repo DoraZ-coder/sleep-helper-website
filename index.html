@@ -15,6 +15,11 @@
                 <li><a href="content.html">睡眠知识</a></li>
                 <li><a href="membership.html">会员</a></li>
                 <li><a href="about.html">关于我们</a></li>
+                <li id="loginLink" style="display: none;"><a href="login.html">登录/注册</a></li>
+                <li id="userInfo" style="display: none;">
+                    <span style="color: var(--primary-color);" id="userEmail"></span>
+                    <a href="#" onclick="logout(); return false;" style="margin-left: 10px;">退出</a>
+                </li>
             </ul>
         </div>
     </nav>
@@ -57,5 +62,41 @@
     </footer>
 
     <script src="js/main.js"></script>
+    <script>
+        // 检查登录状态并显示相应的导航项
+        function checkLoginStatus() {
+            const userEmail = localStorage.getItem('userEmail');
+            const userToken = localStorage.getItem('userToken');
+
+            const loginLink = document.getElementById('loginLink');
+            const userInfo = document.getElementById('userInfo');
+            const userEmailSpan = document.getElementById('userEmail');
+
+            if (userEmail && userToken) {
+                // 已登录，显示用户信息
+                loginLink.style.display = 'none';
+                userInfo.style.display = 'block';
+                userEmailSpan.textContent = userEmail;
+            } else {
+                // 未登录，显示登录链接
+                loginLink.style.display = 'block';
+                userInfo.style.display = 'none';
+            }
+        }
+
+        // 退出登录
+        function logout() {
+            if (confirm('确定要退出登录吗？')) {
+                localStorage.removeItem('userEmail');
+                localStorage.removeItem('userToken');
+                localStorage.removeItem('isPurchased');
+                alert('已退出登录');
+                location.reload();
+            }
+        }
+
+        // 页面加载时检查登录状态
+        window.addEventListener('DOMContentLoaded', checkLoginStatus);
+    </script>
 </body>
 </html>
