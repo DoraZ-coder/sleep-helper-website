@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>睡眠日记 - Easezy</title>
+
+    <!-- PWA Meta Tags -->
+    <meta name="description" content="科学的睡眠评估、个性化改善方案、舒眠声景音乐和睡眠日记">
+    <meta name="theme-color" content="#7FA59A">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Easezy">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="apple-touch-icon" href="/images/logo.png">
+
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <span class="logo-icon"><img src="images/logo.png" alt="Easezy Logo"></span>
+                <span class="logo-text">easezy</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">首页</a></li>
+                <li><a href="content.html">睡眠知识</a></li>
+                <li><a href="sounds.html">舒眠声景</a></li>
+                <li><a href="diary.html">睡眠日记</a></li>
+                <li><a href="membership.html">会员</a></li>
+                <li><a href="about.html">关于我们</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="diary-page">
+        <div class="container">
+            <div class="diary-header">
+                <h1>睡眠日记</h1>
+                <p class="subtitle">记录每一天的睡眠，见证改善的过程</p>
+            </div>
+
+            <!-- 统计卡片 -->
+            <div class="stats-cards">
+                <div class="stat-card">
+                    <div class="stat-content">
+                        <div class="stat-value" id="totalDays">0</div>
+                        <div class="stat-label">累计记录天数</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-content">
+                        <div class="stat-value" id="avgSleep">0h</div>
+                        <div class="stat-label">平均睡眠时长</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-content">
+                        <div class="stat-value" id="avgQuality">0</div>
+                        <div class="stat-label">平均睡眠质量</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-content">
+                        <div class="stat-value" id="streakDays">0</div>
+                        <div class="stat-label">连续打卡天数</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="diary-layout">
+                <!-- 左侧：记录表单 -->
+                <aside class="diary-form-section">
+                    <div class="form-card">
+                        <h2>今日记录</h2>
+                        <form id="diaryForm">
+                            <div class="form-group">
+                                <label for="diaryDate">日期</label>
+                                <input type="date" id="diaryDate" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>上床时间</label>
+                                <input type="time" id="bedTime" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>起床时间</label>
+                                <input type="time" id="wakeTime" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>入睡用时（分钟）</label>
+                                <input type="number" id="fallAsleepTime" min="0" placeholder="例如：30" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>夜间醒来次数</label>
+                                <input type="number" id="wakeCount" min="0" value="0" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>睡眠质量评分</label>
+                                <div class="rating-group">
+                                    <button type="button" class="rating-btn" data-value="1">1分<br><span>很差</span></button>
+                                    <button type="button" class="rating-btn" data-value="2">2分<br><span>较差</span></button>
+                                    <button type="button" class="rating-btn" data-value="3">3分<br><span>一般</span></button>
+                                    <button type="button" class="rating-btn" data-value="4">4分<br><span>良好</span></button>
+                                    <button type="button" class="rating-btn" data-value="5">5分<br><span>优秀</span></button>
+                                </div>
+                                <input type="hidden" id="quality" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>早晨感觉</label>
+                                <div class="mood-group">
+                                    <button type="button" class="mood-btn" data-value="tired">😴 疲惫</button>
+                                    <button type="button" class="mood-btn" data-value="normal">😐 一般</button>
+                                    <button type="button" class="mood-btn" data-value="good">😊 清爽</button>
+                                    <button type="button" class="mood-btn" data-value="energetic">🤩 精力充沛</button>
+                                </div>
+                                <input type="hidden" id="mood" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>备注（选填）</label>
+                                <textarea id="notes" rows="3" placeholder="记录今天的特殊情况、梦境或感受..."></textarea>
+                            </div>
+
+                            <div class="form-actions">
+                                <button type="submit" class="btn-primary">保存记录</button>
+                                <button type="button" class="btn-secondary" id="clearForm">清空</button>
+                            </div>
+                        </form>
+                    </div>
+                </aside>
+
+                <!-- 右侧：数据可视化 -->
+                <div class="diary-charts-section">
+                    <!-- 睡眠时长趋势 -->
+                    <div class="chart-card">
+                        <h3>睡眠时长趋势（最近7天）</h3>
+                        <canvas id="sleepDurationChart"></canvas>
+                    </div>
+
+                    <!-- 睡眠质量趋势 -->
+                    <div class="chart-card">
+                        <h3>睡眠质量趋势（最近7天）</h3>
+                        <canvas id="sleepQualityChart"></canvas>
+                    </div>
+
+                    <!-- 入睡时间分布 -->
+                    <div class="chart-card">
+                        <h3>入睡用时分析（最近7天）</h3>
+                        <canvas id="fallAsleepChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 历史记录列表 -->
+            <div class="diary-history">
+                <div class="history-header">
+                    <h2>历史记录</h2>
+                    <div class="history-filters">
+                        <button class="filter-btn active" data-filter="all">全部</button>
+                        <button class="filter-btn" data-filter="week">最近一周</button>
+                        <button class="filter-btn" data-filter="month">最近一月</button>
+                    </div>
+                </div>
+                <div class="history-list" id="historyList">
+                    <div class="empty-state">
+                        <div class="empty-icon">📝</div>
+                        <p>还没有记录哦</p>
+                        <p class="empty-hint">开始记录你的第一个睡眠日记吧！</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Easezy. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/track.js"></script>
+    <script src="js/diary.js"></script>
+    <script src="js/pwa.js"></script>
+</body>
+</html>

@@ -1423,3 +1423,871 @@ footer {
         font-size: 1rem;
     }
 }
+
+/* 音乐播放器页面样式 */
+.music-player-page {
+    padding-bottom: 120px; /* 为底部播放器留出空间 */
+}
+
+.player-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.player-header h1 {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.player-layout {
+    display: grid;
+    grid-template-columns: 400px 1fr;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+/* 左侧播放列表 */
+.playlist-sidebar {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    max-height: calc(100vh - 350px);
+    overflow-y: auto;
+}
+
+.playlist-sidebar h2 {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+}
+
+.collection-item {
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid var(--light-gray);
+    padding-bottom: 1rem;
+}
+
+.collection-item:last-child {
+    border-bottom: none;
+}
+
+.collection-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background 0.3s;
+}
+
+.collection-header:hover {
+    background: var(--bg-color);
+}
+
+.collection-info {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.collection-info i {
+    font-size: 1.2rem;
+    color: var(--secondary-color);
+}
+
+.collection-name {
+    font-weight: 600;
+    color: var(--text-color);
+    font-size: 1.05rem;
+}
+
+.track-count {
+    font-size: 0.85rem;
+    color: var(--secondary-text);
+    background: var(--bg-color);
+    padding: 0.2rem 0.6rem;
+    border-radius: 12px;
+}
+
+.toggle-icon {
+    color: var(--secondary-text);
+    transition: transform 0.3s;
+}
+
+.collection-item.expanded .toggle-icon {
+    transform: rotate(180deg);
+}
+
+.track-list {
+    list-style: none;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+}
+
+.collection-item.expanded .track-list {
+    max-height: 1000px;
+    margin-top: 0.5rem;
+}
+
+.track-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: all 0.3s;
+}
+
+.track-item:hover {
+    background: var(--bg-color);
+}
+
+.track-item.playing {
+    background: linear-gradient(135deg, rgba(127, 165, 154, 0.1), rgba(107, 142, 132, 0.1));
+}
+
+.track-item.playing .track-number {
+    color: var(--secondary-color);
+}
+
+.track-item.playing .track-name {
+    color: var(--secondary-color);
+    font-weight: 600;
+}
+
+.track-number {
+    min-width: 24px;
+    text-align: center;
+    color: var(--secondary-text);
+    font-size: 0.9rem;
+}
+
+.track-name {
+    flex: 1;
+    color: var(--text-color);
+    font-size: 0.95rem;
+}
+
+.track-duration {
+    color: var(--secondary-text);
+    font-size: 0.85rem;
+}
+
+/* 右侧当前播放信息 */
+.now-playing {
+    background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
+    border-radius: 16px;
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--white);
+    min-height: 400px;
+}
+
+.album-art {
+    width: 200px;
+    height: 200px;
+    margin-bottom: 2rem;
+}
+
+.album-art-placeholder {
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 4rem;
+    backdrop-filter: blur(10px);
+}
+
+.now-playing-info h3 {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+}
+
+.now-playing-info p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+}
+
+/* 底部播放器控制栏 */
+.player-controls-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--white);
+    border-top: 1px solid var(--light-gray);
+    box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.08);
+    z-index: 1000;
+}
+
+.player-controls-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 1rem 2rem;
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    gap: 2rem;
+    align-items: center;
+}
+
+/* 左侧：轨道信息 */
+.controls-track-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.controls-album-art {
+    width: 56px;
+    height: 56px;
+    background: var(--bg-color);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--secondary-color);
+    font-size: 1.5rem;
+}
+
+.controls-text {
+    flex: 1;
+    min-width: 0;
+}
+
+.controls-track-name {
+    font-weight: 600;
+    color: var(--text-color);
+    font-size: 0.95rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.controls-collection-name {
+    font-size: 0.85rem;
+    color: var(--secondary-text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* 中间：播放控制 */
+.controls-center {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.controls-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.control-btn {
+    background: none;
+    border: none;
+    color: var(--text-color);
+    font-size: 1.2rem;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+}
+
+.control-btn:hover {
+    background: var(--bg-color);
+    color: var(--secondary-color);
+}
+
+.control-btn-play {
+    width: 48px;
+    height: 48px;
+    background: var(--secondary-color);
+    color: var(--white);
+    font-size: 1.4rem;
+}
+
+.control-btn-play:hover {
+    background: var(--accent-color);
+    transform: scale(1.05);
+}
+
+#loopBtn.active {
+    color: var(--secondary-color);
+}
+
+/* 进度条 */
+.progress-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.time-current,
+.time-total {
+    font-size: 0.85rem;
+    color: var(--secondary-text);
+    min-width: 40px;
+}
+
+.progress-bar {
+    flex: 1;
+    height: 6px;
+    background: var(--light-gray);
+    border-radius: 3px;
+    position: relative;
+    cursor: pointer;
+}
+
+.progress-fill {
+    height: 100%;
+    background: var(--secondary-color);
+    border-radius: 3px;
+    width: 0%;
+    transition: width 0.1s linear;
+    position: relative;
+}
+
+.progress-handle {
+    position: absolute;
+    top: 50%;
+    right: -6px;
+    transform: translateY(-50%);
+    width: 12px;
+    height: 12px;
+    background: var(--secondary-color);
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.progress-bar:hover .progress-handle {
+    opacity: 1;
+}
+
+/* 右侧：音量控制 */
+.controls-right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    justify-content: flex-end;
+}
+
+.volume-slider {
+    width: 100px;
+}
+
+.volume-slider input[type="range"] {
+    width: 100%;
+    height: 6px;
+    background: var(--light-gray);
+    border-radius: 3px;
+    outline: none;
+    -webkit-appearance: none;
+}
+
+.volume-slider input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 12px;
+    height: 12px;
+    background: var(--secondary-color);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.volume-slider input[type="range"]::-moz-range-thumb {
+    width: 12px;
+    height: 12px;
+    background: var(--secondary-color);
+    border-radius: 50%;
+    cursor: pointer;
+    border: none;
+}
+
+/* 响应式设计 */
+@media (max-width: 1024px) {
+    .player-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .playlist-sidebar {
+        max-height: 400px;
+    }
+
+    .player-controls-container {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .controls-track-info {
+        justify-content: center;
+    }
+
+    .controls-right {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .music-player-page {
+        padding-bottom: 180px;
+    }
+
+    .player-controls-container {
+        padding: 1rem;
+    }
+
+    .controls-buttons {
+        gap: 0.5rem;
+    }
+
+    .control-btn {
+        width: 36px;
+        height: 36px;
+        font-size: 1rem;
+    }
+
+    .control-btn-play {
+        width: 44px;
+        height: 44px;
+        font-size: 1.2rem;
+    }
+
+    .volume-slider {
+        width: 80px;
+    }
+}
+
+/* 睡眠日记页面样式 */
+.diary-page {
+    padding: 2rem 0 4rem;
+}
+
+.diary-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.diary-header h1 {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+/* 统计卡片 */
+.stats-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+}
+
+.stat-card {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s;
+    text-align: center;
+}
+
+.stat-card:hover {
+    transform: translateY(-3px);
+}
+
+.stat-content {
+    width: 100%;
+}
+
+.stat-value {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 0.25rem;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    color: var(--secondary-text);
+}
+
+/* 日记布局 */
+.diary-layout {
+    display: grid;
+    grid-template-columns: 400px 1fr;
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+/* 左侧表单 */
+.diary-form-section {
+    position: sticky;
+    top: 100px;
+    align-self: start;
+}
+
+.form-card {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.form-card h2 {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    color: var(--text-color);
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+}
+
+.form-group input[type="date"],
+.form-group input[type="time"],
+.form-group input[type="number"],
+.form-group textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 2px solid var(--light-gray);
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--secondary-color);
+}
+
+.form-group textarea {
+    resize: vertical;
+    font-family: inherit;
+}
+
+/* 评分按钮组 */
+.rating-group {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.rating-btn {
+    flex: 1;
+    padding: 0.75rem 0.5rem;
+    background: var(--bg-color);
+    border: 2px solid var(--light-gray);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-color);
+    text-align: center;
+}
+
+.rating-btn span {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 400;
+    color: var(--secondary-text);
+    margin-top: 0.25rem;
+}
+
+.rating-btn:hover {
+    border-color: var(--secondary-color);
+    background: rgba(127, 165, 154, 0.1);
+}
+
+.rating-btn.active {
+    background: var(--secondary-color);
+    color: var(--white);
+    border-color: var(--secondary-color);
+}
+
+.rating-btn.active span {
+    color: var(--white);
+}
+
+/* 心情按钮组 */
+.mood-group {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+}
+
+.mood-btn {
+    padding: 0.75rem;
+    background: var(--bg-color);
+    border: 2px solid var(--light-gray);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.mood-btn:hover {
+    border-color: var(--secondary-color);
+    background: rgba(127, 165, 154, 0.1);
+}
+
+.mood-btn.active {
+    background: var(--secondary-color);
+    color: var(--white);
+    border-color: var(--secondary-color);
+}
+
+/* 表单操作按钮 */
+.form-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.form-actions .btn-primary,
+.form-actions .btn-secondary {
+    flex: 1;
+}
+
+/* 右侧图表区域 */
+.diary-charts-section {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.chart-card {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.chart-card h3 {
+    font-size: 1.2rem;
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+}
+
+.chart-card canvas {
+    max-height: 300px;
+}
+
+/* 历史记录 */
+.diary-history {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.history-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.history-header h2 {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+}
+
+.history-filters {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.filter-btn {
+    padding: 0.5rem 1rem;
+    background: var(--bg-color);
+    border: 2px solid transparent;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--text-color);
+    transition: all 0.3s;
+}
+
+.filter-btn:hover {
+    background: rgba(127, 165, 154, 0.1);
+}
+
+.filter-btn.active {
+    background: var(--secondary-color);
+    color: var(--white);
+}
+
+.history-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.history-item {
+    padding: 1.5rem;
+    background: var(--bg-color);
+    border-radius: 12px;
+    border-left: 4px solid var(--secondary-color);
+    transition: all 0.3s;
+}
+
+.history-item:hover {
+    transform: translateX(5px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.history-item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.history-date {
+    font-weight: 600;
+    color: var(--primary-color);
+    font-size: 1.05rem;
+}
+
+.history-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.history-actions button {
+    padding: 0.4rem 0.8rem;
+    background: var(--white);
+    border: 1px solid var(--light-gray);
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: all 0.3s;
+}
+
+.history-actions button:hover {
+    background: var(--secondary-color);
+    color: var(--white);
+    border-color: var(--secondary-color);
+}
+
+.history-item-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+}
+
+.history-detail {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.history-detail-label {
+    font-size: 0.85rem;
+    color: var(--secondary-text);
+}
+
+.history-detail-value {
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.history-notes {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--light-gray);
+    font-size: 0.9rem;
+    color: var(--secondary-text);
+    font-style: italic;
+}
+
+/* 空状态 */
+.empty-state {
+    text-align: center;
+    padding: 3rem 1rem;
+}
+
+.empty-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+}
+
+.empty-state p {
+    font-size: 1.1rem;
+    color: var(--text-color);
+    margin-bottom: 0.5rem;
+}
+
+.empty-hint {
+    font-size: 0.95rem;
+    color: var(--secondary-text);
+}
+
+/* 响应式设计 */
+@media (max-width: 1024px) {
+    .diary-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .diary-form-section {
+        position: static;
+    }
+
+    .stats-cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .stats-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .history-header {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: flex-start;
+    }
+
+    .history-item-content {
+        grid-template-columns: 1fr;
+    }
+
+    .rating-group {
+        flex-wrap: wrap;
+    }
+
+    .rating-btn {
+        min-width: 60px;
+    }
+}

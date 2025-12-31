@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>舒眠声景 - Easezy</title>
+
+    <!-- PWA Meta Tags -->
+    <meta name="description" content="科学的睡眠评估、个性化改善方案、舒眠声景音乐和睡眠日记">
+    <meta name="theme-color" content="#7FA59A">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Easezy">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="apple-touch-icon" href="/images/logo.png">
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <span class="logo-icon"><img src="images/logo.png" alt="Easezy Logo"></span>
+                <span class="logo-text">easezy</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">首页</a></li>
+                <li><a href="content.html">睡眠知识</a></li>
+                <li><a href="sounds.html">舒眠声景</a></li>
+                <li><a href="diary.html">睡眠日记</a></li>
+                <li><a href="membership.html">会员</a></li>
+                <li><a href="about.html">关于我们</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="music-player-page">
+        <div class="container">
+            <div class="player-header">
+                <h1>舒眠声景</h1>
+                <p class="subtitle">精选声音疗愈合集，助你放松身心，安然入眠</p>
+            </div>
+
+            <div class="player-layout">
+                <!-- 左侧：合集列表 -->
+                <aside class="playlist-sidebar">
+                    <h2>音乐合集</h2>
+                    <div class="collections">
+                        <!-- 合集1：水声疗愈 -->
+                        <div class="collection-item" data-collection="水声疗愈">
+                            <div class="collection-header">
+                                <div class="collection-info">
+                                    <i class="fas fa-water"></i>
+                                    <span class="collection-name">水声疗愈</span>
+                                    <span class="track-count">3首</span>
+                                </div>
+                                <i class="fas fa-chevron-down toggle-icon"></i>
+                            </div>
+                            <ul class="track-list">
+                                <li class="track-item" data-src="sounds/水声疗愈/水之和谐·耳鸣疗愈.mp3">
+                                    <span class="track-number">1</span>
+                                    <span class="track-name">水之和谐·耳鸣疗愈</span>
+                                    <span class="track-duration">--:--</span>
+                                </li>
+                                <li class="track-item" data-src="sounds/水声疗愈/深海安眠曲.mp3">
+                                    <span class="track-number">2</span>
+                                    <span class="track-name">深海安眠曲</span>
+                                    <span class="track-duration">--:--</span>
+                                </li>
+                                <li class="track-item" data-src="sounds/水声疗愈/舒缓睡眠波浪.mp3">
+                                    <span class="track-number">3</span>
+                                    <span class="track-name">舒缓睡眠波浪</span>
+                                    <span class="track-duration">--:--</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- 合集2：深度冥想 -->
+                        <div class="collection-item" data-collection="深度冥想">
+                            <div class="collection-header">
+                                <div class="collection-info">
+                                    <i class="fas fa-om"></i>
+                                    <span class="collection-name">深度冥想</span>
+                                    <span class="track-count">7首</span>
+                                </div>
+                                <i class="fas fa-chevron-down toggle-icon"></i>
+                            </div>
+                            <ul class="track-list">
+                                <li class="track-item" data-src="sounds/深度冥想/慈悲冥想.mp3">
+                                    <span class="track-number">1</span>
+                                    <span class="track-name">慈悲冥想</span>
+                                    <span class="track-duration">--:--</span>
+                                </li>
+                                <li class="track-item" data-src="sounds/深度冥想/正念冥想纯音.mp3">
+                                    <span class="track-number">2</span>
+                                    <span class="track-name">正念冥想纯音</span>
+                                    <span class="track-duration">--:--</span>
+                                </li>
+                                <li class="track-item" data-src="sounds/深度冥想/沉浸式瑜伽冥想.mp3">
+                                    <span class="track-number">3</span>
+                                    <span class="track-name">沉浸式瑜伽冥想</span>
+                                    <span class="track-duration">--:--</span>
+                                </li>
+                                <li class="track-item" data-src="sounds/深度冥想/深度冥想.mp3">
+                                    <span class="track-number">4</span>
+                                    <span class="track-name">深度冥想</span>
+                                    <span class="track-duration">--:--</span>
+                                </li>
+                                <li class="track-item" data-src="sounds/深度冥想/索尔费吉奥缓解焦虑.mp3">
+                                    <span class="track-number">5</span>
+                                    <span class="track-name">索尔费吉奥缓解焦虑</span>
+                                    <span class="track-duration">--:--</span>
+                                </li>
+                                <li class="track-item" data-src="sounds/深度冥想/脉轮冥想.mp3">
+                                    <span class="track-number">6</span>
+                                    <span class="track-name">脉轮冥想</span>
+                                    <span class="track-duration">--:--</span>
+                                </li>
+                                <li class="track-item" data-src="sounds/深度冥想/西藏超验冥想.mp3">
+                                    <span class="track-number">7</span>
+                                    <span class="track-name">西藏超验冥想</span>
+                                    <span class="track-duration">--:--</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- 合集3：自然钢琴轻音乐 -->
+                        <div class="collection-item" data-collection="自然钢琴轻音乐">
+                            <div class="collection-header">
+                                <div class="collection-info">
+                                    <i class="fas fa-music"></i>
+                                    <span class="collection-name">自然钢琴轻音乐</span>
+                                    <span class="track-count">12首</span>
+                                </div>
+                                <i class="fas fa-chevron-down toggle-icon"></i>
+                            </div>
+                            <ul class="track-list">
+                                <li class="track-item" data-src="sounds/自然钢琴轻音乐/山涧溪流钢琴.mp3">
+                                    <span class="track-number">1</span>
+                                    <span class="track-name">山涧溪流钢琴</span>
+                                    <span class="track-duration">--:--</span>
+                                </li>
+                                <li class="track-item" data-src="sounds/自然钢琴轻音乐/山风与静谧钢琴.mp3">
+                                    <span class="track-number">2</span>
+                                    <span class="track-name">山风与静谧钢琴</span>
+                                    <span class="track-duration">--:--</span>
+                                </li>
+                                <li class="track-item" data-src="sounds/自然钢琴轻音乐/晨露·鸟鸣·钢琴.mp3">
+                                    <span class="track-number">3</span>
+                                    <span class="track-name">晨露·鸟鸣·钢琴</span>
+                                    <span class="track-duration">--:--</span>
+                                </li>
+                                <li class="track-item" data-src="sounds/自然钢琴轻音乐/柔雨钢琴.mp3">
+                                    <span class="track-number">4</span>
+                                    <span class="track-name">柔雨钢琴</span>
+                                    <span class="track-duration">--:--</span>
+                                </li>
+                                <li class="track-item" data-src="sounds/自然钢琴轻音乐/树林风声与宁静钢琴.mp3">
+                                    <span class="track-number">5</span>
+                                    <span class="track-name">树林风声与宁静钢琴</span>
+                                    <span class="track-duration">--:--</span>
+                                </li>
+                                <li class="track-item" data-src="sounds/自然钢琴轻音乐/森林氛围轻钢琴.mp3">
+                                    <span class="track-number">6</span>
+                                    <span class="track-name">森林氛围轻钢琴</span>
+                                    <span class="track-duration">--:--</span>
+                                </li>
+                                <li class="track-item" data-src="sounds/自然钢琴轻音乐/海风与平和钢琴.mp3">
+                                    <span class="track-number">7</span>
+                                    <span class="track-name">海风与平和钢琴</span>
+                                    <span class="track-duration">--:--</span>
+                                </li>
+                                <li class="track-item" data-src="sounds/自然钢琴轻音乐/自然和声钢琴.mp3">
+                                    <span class="track-number">8</span>
+                                    <span class="track-name">自然和声钢琴</span>
+                                    <span class="track-duration">--:--</span>
+                                </li>
+                                <li class="track-item" data-src="sounds/自然钢琴轻音乐/自然宁静钢琴.mp3">
+                                    <span class="track-number">9</span>
+                                    <span class="track-name">自然宁静钢琴</span>
+                                    <span class="track-duration">--:--</span>
+                                </li>
+                                <li class="track-item" data-src="sounds/自然钢琴轻音乐/草地鸟鸣与静谧钢琴.mp3">
+                                    <span class="track-number">10</span>
+                                    <span class="track-name">草地鸟鸣与静谧钢琴</span>
+                                    <span class="track-duration">--:--</span>
+                                </li>
+                                <li class="track-item" data-src="sounds/自然钢琴轻音乐/轻风森林钢琴.mp3">
+                                    <span class="track-number">11</span>
+                                    <span class="track-name">轻风森林钢琴</span>
+                                    <span class="track-duration">--:--</span>
+                                </li>
+                                <li class="track-item" data-src="sounds/自然钢琴轻音乐/雨林氛围钢琴.mp3">
+                                    <span class="track-number">12</span>
+                                    <span class="track-name">雨林氛围钢琴</span>
+                                    <span class="track-duration">--:--</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- 合集4：西藏颂钵冥想舒眠 -->
+                        <div class="collection-item" data-collection="西藏颂钵冥想舒眠">
+                            <div class="collection-header">
+                                <div class="collection-info">
+                                    <i class="fas fa-spa"></i>
+                                    <span class="collection-name">西藏颂钵冥想舒眠</span>
+                                    <span class="track-count">10首</span>
+                                </div>
+                                <i class="fas fa-chevron-down toggle-icon"></i>
+                            </div>
+                            <ul class="track-list">
+                                <li class="track-item" data-src="sounds/西藏颂钵冥想舒眠/喜马拉雅水晶声浴.mp3">
+                                    <span class="track-number">1</span>
+                                    <span class="track-name">喜马拉雅水晶声浴</span>
+                                    <span class="track-duration">--:--</span>
+                                </li>
+                                <li class="track-item" data-src="sounds/西藏颂钵冥想舒眠/喜马拉雅流水声浴.mp3">
+                                    <span class="track-number">2</span>
+                                    <span class="track-name">喜马拉雅流水声浴</span>
+                                    <span class="track-duration">--:--</span>
+                                </li>
+                                <li class="track-item" data-src="sounds/西藏颂钵冥想舒眠/水洞西藏疗愈频率.mp3">
+                                    <span class="track-number">3</span>
+                                    <span class="track-name">水洞西藏疗愈频率</span>
+                                    <span class="track-duration">--:--</span>
+                                </li>
+                                <li class="track-item" data-src="sounds/西藏颂钵冥想舒眠/水洞颂钵声浴.mp3">
+                                    <span class="track-number">4</span>
+                                    <span class="track-name">水洞颂钵声浴</span>
+                                    <span class="track-duration">--:--</span>
+                                </li>
+                                <li class="track-item" data-src="sounds/西藏颂钵冥想舒眠/沉浸式水中唱钵冥想.mp3">
+                                    <span class="track-number">5</span>
+                                    <span class="track-name">沉浸式水中唱钵冥想</span>
+                                    <span class="track-duration">--:--</span>
+                                </li>
+                                <li class="track-item" data-src="sounds/西藏颂钵冥想舒眠/深洞共鸣颂钵.mp3">
+                                    <span class="track-number">6</span>
+                                    <span class="track-name">深洞共鸣颂钵</span>
+                                    <span class="track-duration">--:--</span>
+                                </li>
+                                <li class="track-item" data-src="sounds/西藏颂钵冥想舒眠/深洞震动与流水.mp3">
+                                    <span class="track-number">7</span>
+                                    <span class="track-name">深洞震动与流水</span>
+                                    <span class="track-duration">--:--</span>
+                                </li>
+                                <li class="track-item" data-src="sounds/西藏颂钵冥想舒眠/神圣洞穴声浴之旅.mp3">
+                                    <span class="track-number">8</span>
+                                    <span class="track-name">神圣洞穴声浴之旅</span>
+                                    <span class="track-duration">--:--</span>
+                                </li>
+                                <li class="track-item" data-src="sounds/西藏颂钵冥想舒眠/纯音西藏唱钵冥想.mp3">
+                                    <span class="track-number">9</span>
+                                    <span class="track-name">纯音西藏唱钵冥想</span>
+                                    <span class="track-duration">--:--</span>
+                                </li>
+                                <li class="track-item" data-src="sounds/西藏颂钵冥想舒眠/西藏颂钵冥想入眠.mp3">
+                                    <span class="track-number">10</span>
+                                    <span class="track-name">西藏颂钵冥想入眠</span>
+                                    <span class="track-duration">--:--</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </aside>
+
+                <!-- 右侧：当前播放信息 -->
+                <div class="now-playing">
+                    <div class="album-art">
+                        <div class="album-art-placeholder">
+                            <i class="fas fa-music"></i>
+                        </div>
+                    </div>
+                    <div class="now-playing-info">
+                        <h3 class="current-track-name">选择一首音乐开始播放</h3>
+                        <p class="current-collection-name">舒眠声景</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 底部播放器控制栏 -->
+        <div class="player-controls-bar">
+            <div class="player-controls-container">
+                <!-- 左侧：当前播放信息 -->
+                <div class="controls-track-info">
+                    <div class="controls-album-art">
+                        <i class="fas fa-music"></i>
+                    </div>
+                    <div class="controls-text">
+                        <div class="controls-track-name">未播放</div>
+                        <div class="controls-collection-name">选择音乐</div>
+                    </div>
+                </div>
+
+                <!-- 中间：播放控制 -->
+                <div class="controls-center">
+                    <div class="controls-buttons">
+                        <button class="control-btn" id="prevBtn" title="上一曲">
+                            <i class="fas fa-step-backward"></i>
+                        </button>
+                        <button class="control-btn control-btn-play" id="playPauseBtn" title="播放">
+                            <i class="fas fa-play"></i>
+                        </button>
+                        <button class="control-btn" id="nextBtn" title="下一曲">
+                            <i class="fas fa-step-forward"></i>
+                        </button>
+                        <button class="control-btn" id="loopBtn" title="顺序播放">
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                    <div class="progress-container">
+                        <span class="time-current">0:00</span>
+                        <div class="progress-bar">
+                            <div class="progress-fill"></div>
+                            <div class="progress-handle"></div>
+                        </div>
+                        <span class="time-total">0:00</span>
+                    </div>
+                </div>
+
+                <!-- 右侧：音量控制 -->
+                <div class="controls-right">
+                    <button class="control-btn" id="volumeBtn">
+                        <i class="fas fa-volume-up"></i>
+                    </button>
+                    <div class="volume-slider">
+                        <input type="range" min="0" max="100" value="80" id="volumeRange">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Easezy. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- 音频元素 -->
+    <audio id="audioPlayer" preload="metadata"></audio>
+
+    <script src="js/track.js"></script>
+    <script src="js/sounds.js"></script>
+    <script src="js/pwa.js"></script>
+</body>
+</html>
