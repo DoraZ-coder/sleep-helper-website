@@ -29,6 +29,7 @@ document.addEventListener('DOMContentLoaded', function() {
     let playlist = Array.from(trackItems);
     let isPlaying = false;
     let loopMode = 'none'; // 'one' = 单曲循环, 'none' = 顺序播放
+    let isDragging = false; // 是否正在拖动进度条
 
     // 初始化
     init();
@@ -70,6 +71,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // 进度条拖动
         progressBar.addEventListener('click', seekAudio);
+        progressBar.addEventListener('mousedown', startDrag);
+        document.addEventListener('mousemove', drag);
+        document.addEventListener('mouseup', stopDrag);
+
+        // 移动端触摸支持
+        progressBar.addEventListener('touchstart', startDrag);
+        document.addEventListener('touchmove', drag);
+        document.addEventListener('touchend', stopDrag);
 
         // 音频事件监听
         audioPlayer.addEventListener('timeupdate', updateProgress);
@@ -206,7 +215,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // 更新进度条
     function updateProgress() {
-        if (!audioPlayer.duration) return;
+        if (!audioPlayer.duration || isDragging) return; // 拖动时不自动更新
 
         const percent = (audioPlayer.currentTime / audioPlayer.duration) * 100;
         progressFill.style.width = percent + '%';
@@ -219,13 +228,58 @@ document.addEventListener('DOMContentLoaded', function() {
         timeTotal.textContent = formatTime(audioPlayer.duration);
     }
 
-    // 进度条拖动
+    // 进度条点击跳转
     function seekAudio(e) {
-        if (!audioPlayer.duration) return;
+        if (!audioPlayer.duration || isDragging) return;
 
         const rect = progressBar.getBoundingClientRect();
         const percent = (e.clientX - rect.left) / rect.width;
         audioPlayer.currentTime = percent * audioPlayer.duration;
+    }
+
+    // 开始拖动进度条
+    function startDrag(e) {
+        if (!audioPlayer.duration) return;
+        e.preventDefault();
+        isDragging = true;
+        progressBar.style.cursor = 'grabbing';
+        updateProgressByEvent(e);
+    }
+
+    // 拖动进度条
+    function drag(e) {
+        if (!isDragging) return;
+        e.preventDefault();
+        updateProgressByEvent(e);
+    }
+
+    // 停止拖动进度条
+    function stopDrag(e) {
+        if (!isDragging) return;
+        isDragging = false;
+        progressBar.style.cursor = 'pointer';
+    }
+
+    // 根据鼠标/触摸位置更新进度
+    function updateProgressByEvent(e) {
+        const rect = progressBar.getBoundingClientRect();
+        let clientX;
+
+        // 处理触摸事件和鼠标事件
+        if (e.type.startsWith('touch')) {
+            clientX = e.touches[0]?.clientX || e.changedTouches[0]?.clientX;
+        } else {
+            clientX = e.clientX;
+        }
+
+        // 计算百分比，限制在0-100%之间
+        let percent = (clientX - rect.left) / rect.width;
+        percent = Math.max(0, Math.min(1, percent));
+
+        // 更新音频时间和进度条
+        audioPlayer.currentTime = percent * audioPlayer.duration;
+        progressFill.style.width = (percent * 100) + '%';
+        timeCurrent.textContent = formatTime(audioPlayer.currentTime);
     }
 
     // 音量控制
