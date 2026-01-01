@@ -1264,8 +1264,9 @@ main {
 
 /* 页脚 */
 footer {
-    background: var(--primary-color);
-    color: var(--white);
+    background: #161b22;
+    border-top: 1px solid #21262d;
+    color: var(--secondary-text);
     text-align: center;
     padding: 2rem 0;
     margin-top: 4rem;
