@@ -292,16 +292,17 @@ main {
     display: flex;
     align-items: center;
     padding: 1.2rem;
-    background: var(--bg-color);
-    border: 2px solid var(--light-gray);
+    background: var(--card-bg);
+    border: 2px solid #21262d;
     border-radius: 12px;
     cursor: pointer;
     transition: all 0.3s;
+    color: var(--text-color);
 }
 
 .option:hover {
     border-color: var(--secondary-color);
-    background: #F9F8F6;
+    background: var(--card-hover-bg);
 }
 
 .option input[type="radio"],
