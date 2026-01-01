@@ -2697,13 +2697,17 @@ footer {
 
 /* ==================== 首页样式 ==================== */
 
+/* 整体背景 - 统一渐变避免断层 */
+.home-main {
+    background: linear-gradient(180deg, #1a2f2a 0%, #0f1419 30%, #0f1419 70%, #161b22 100%);
+}
+
 /* Hero Section */
 .home-hero {
-    background: linear-gradient(135deg, #1a2f2a 0%, #0f1419 100%);
+    background: transparent;
     padding: 8rem 0 6rem;
     color: white;
     text-align: center;
-    border-bottom: 1px solid rgba(141, 181, 168, 0.1);
 }
 
 .hero-content {
@@ -2790,7 +2794,7 @@ footer {
 
 /* 核心价值 */
 .home-values {
-    background: #0f1419;
+    background: transparent;
 }
 
 .values-grid {
@@ -2833,7 +2837,7 @@ footer {
 
 /* 365服务亮点 */
 .home-highlight {
-    background: linear-gradient(135deg, #1a2f2a 0%, #243832 100%);
+    background: rgba(26, 47, 42, 0.3);
     color: white;
     border-top: 1px solid rgba(141, 181, 168, 0.1);
     border-bottom: 1px solid rgba(141, 181, 168, 0.1);
@@ -2915,7 +2919,7 @@ footer {
 
 /* 使用流程 */
 .home-process {
-    background: #0f1419;
+    background: transparent;
 }
 
 .process-steps {
@@ -2988,7 +2992,7 @@ footer {
 
 /* 社会证明 */
 .home-social-proof {
-    background: #161b22;
+    background: transparent;
     padding: 5rem 0;
 }
 
@@ -3016,7 +3020,7 @@ footer {
 
 /* 最终CTA */
 .home-final-cta {
-    background: linear-gradient(135deg, #1a2f2a 0%, #0f1419 100%);
+    background: transparent;
     border-top: 1px solid rgba(141, 181, 168, 0.1);
 }
 
