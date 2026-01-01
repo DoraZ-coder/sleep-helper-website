@@ -104,6 +104,9 @@ document.addEventListener('DOMContentLoaded', function() {
         audioPlayer.play();
         isPlaying = true;
 
+        // 显示进度条小圆点
+        progressHandle.classList.add('visible');
+
         // 更新UI
         updatePlayingState(track);
         updateTrackInfo(trackName, collectionName);

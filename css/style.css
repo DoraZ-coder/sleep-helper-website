@@ -1769,18 +1769,27 @@ footer {
 .progress-handle {
     position: absolute;
     top: 50%;
-    right: -6px;
-    transform: translateY(-50%);
-    width: 12px;
-    height: 12px;
-    background: var(--secondary-color);
+    left: 0%;
+    transform: translate(-50%, -50%);
+    width: 14px;
+    height: 14px;
+    background: white;
+    border: 2px solid var(--secondary-color);
     border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     opacity: 0;
-    transition: opacity 0.3s;
+    transition: opacity 0.3s, transform 0.1s;
+    pointer-events: none;
+    z-index: 2;
 }
 
-.progress-bar:hover .progress-handle {
+.progress-bar:hover .progress-handle,
+.progress-handle.visible {
     opacity: 1;
+}
+
+.progress-handle:active {
+    transform: translate(-50%, -50%) scale(1.2);
 }
 
 /* 右侧：音量控制 */
