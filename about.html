@@ -72,11 +72,6 @@
                         <p>全年每晚都有温柔的声音陪你入睡，无论何时都不孤单</p>
                     </div>
                     <div class="advantage-card">
-                        <div class="advantage-icon">🎧</div>
-                        <h3>真人声陪伴</h3>
-                        <p>精心制作的 ASMR 人声音频，带着温度的真实陪伴</p>
-                    </div>
-                    <div class="advantage-card">
                         <div class="advantage-icon">📚</div>
                         <h3>深度知识科普</h3>
                         <p>帮你理解睡眠的运作，当你懂了，焦虑自然减少</p>
@@ -94,22 +89,22 @@
                     <p class="philosophy-intro">在一个充满焦虑营销的时代，我们选择做一个纯粹的睡眠陪伴者</p>
                     <div class="philosophy-grid">
                         <div class="philosophy-item">
-                            <div class="philosophy-icon">❌</div>
+                            <div class="philosophy-icon">✕</div>
                             <h4>不制造焦虑</h4>
                             <p>不会用"再不改善就晚了"吓唬你，睡眠改善需要时间，我们陪你慢慢来</p>
                         </div>
                         <div class="philosophy-item">
-                            <div class="philosophy-icon">❌</div>
+                            <div class="philosophy-icon">✕</div>
                             <h4>不夸大效果</h4>
                             <p>不承诺"7天治好失眠"，每个人的旅程都不同，进步由你自己创造</p>
                         </div>
                         <div class="philosophy-item">
-                            <div class="philosophy-icon">❌</div>
+                            <div class="philosophy-icon">✕</div>
                             <h4>不推销产品</h4>
                             <p>不会塞给你一堆褪黑素、助眠仪，最好的助眠工具是理解和陪伴</p>
                         </div>
                         <div class="philosophy-item">
-                            <div class="philosophy-icon">❌</div>
+                            <div class="philosophy-icon">✕</div>
                             <h4>不打卡绑架</h4>
                             <p>没有连续打卡压力，没有完成焦虑，休息本该自由自在</p>
                         </div>
@@ -148,6 +143,16 @@
                             <h3>随时回听</h3>
                             <p>喜欢的内容可以无限次重复，像老朋友一样熟悉、安心</p>
                         </div>
+                        <div class="service-365-card">
+                            <div class="service-number">05</div>
+                            <h3>灵活时长</h3>
+                            <p>可调节引导强度与播放时长，5分钟到60分钟任你选择，贴合你的入睡节奏</p>
+                        </div>
+                        <div class="service-365-card">
+                            <div class="service-number">06</div>
+                            <h3>真人声温度</h3>
+                            <p>精心录制的ASMR人声音频，不是机器合成，而是真实的陪伴和温暖</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -174,28 +179,30 @@
             <div class="container-narrow">
                 <div class="section-label">联系我们</div>
                 <h2 class="section-title">我们随时在这里</h2>
-                <div class="contact-content">
-                    <p class="contact-intro">有任何问题、建议或想法，都欢迎告诉我们</p>
-                    <div class="contact-methods">
-                        <div class="contact-item">
-                            <div class="contact-icon">📧</div>
-                            <div class="contact-info">
-                                <h4>电子邮件</h4>
-                                <a href="mailto:hello@easezy.com">hello@easezy.com</a>
-                            </div>
-                        </div>
-                        <div class="contact-item">
-                            <div class="contact-icon">💬</div>
-                            <div class="contact-info">
-                                <h4>在线客服</h4>
-                                <p>每天 9:00 - 22:00 在线陪伴</p>
-                            </div>
-                        </div>
+                <p class="contact-intro">有任何问题、建议或想法，都欢迎告诉我们</p>
+
+                <form class="contact-form">
+                    <div class="form-group">
+                        <label for="contact-name">姓名</label>
+                        <input type="text" id="contact-name" name="name" placeholder="您的姓名" required>
                     </div>
-                    <div class="contact-cta">
-                        <p>好好睡觉，从今晚开始</p>
-                        <a href="assessment.html" class="btn-primary-large">开始睡眠评估</a>
+
+                    <div class="form-group">
+                        <label for="contact-email">邮箱</label>
+                        <input type="email" id="contact-email" name="email" placeholder="your.email@example.com" required>
                     </div>
+
+                    <div class="form-group">
+                        <label for="contact-message">我能帮您什么？</label>
+                        <textarea id="contact-message" name="message" rows="6" placeholder="告诉我们您的问题或想法..." required></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-submit">发送消息</button>
+                </form>
+
+                <div class="contact-footer">
+                    <p>或直接联系我们</p>
+                    <a href="mailto:jojotongzhou@gmail.com" class="contact-email">jojotongzhou@gmail.com</a>
                 </div>
             </div>
         </section>
