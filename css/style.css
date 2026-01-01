@@ -2723,38 +2723,74 @@ footer {
 
 /* Hero Section */
 .home-hero {
+    position: relative;
     background: transparent;
-    padding: 8rem 0 6rem;
+    /* 添加背景图片位置 - 用户可以替换为自己的图片 */
+    background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=2070');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    padding: 10rem 0 8rem;
     color: white;
     text-align: center;
+    overflow: hidden;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(15, 20, 25, 0.85) 0%, rgba(26, 47, 42, 0.75) 100%);
+    z-index: 1;
 }
 
 .hero-content {
+    position: relative;
+    z-index: 2;
     max-width: 900px;
     margin: 0 auto;
 }
 
 .hero-tag {
-    font-size: 0.875rem;
+    font-size: 0.75rem;
     font-weight: 600;
-    letter-spacing: 2px;
+    letter-spacing: 3px;
     text-transform: uppercase;
-    opacity: 0.9;
-    margin-bottom: 1.5rem;
+    opacity: 0.7;
+    margin-bottom: 2rem;
 }
 
 .hero-title {
-    font-size: 3.5rem;
-    font-weight: 700;
-    line-height: 1.2;
+    font-size: 4rem;
+    font-weight: 300;
+    line-height: 1.3;
+    margin-bottom: 1rem;
+    letter-spacing: 2px;
+}
+
+.hero-divider {
+    display: inline-block;
+    margin: 0 1.5rem;
+    opacity: 0.5;
+    font-weight: 200;
+}
+
+.hero-subtitle {
+    font-size: 1.5rem;
+    font-weight: 300;
+    opacity: 0.9;
     margin-bottom: 1.5rem;
+    font-style: italic;
 }
 
 .hero-description {
-    font-size: 1.25rem;
-    opacity: 0.95;
+    font-size: 1rem;
+    opacity: 0.8;
     line-height: 1.8;
-    margin-bottom: 2.5rem;
+    margin-bottom: 3rem;
+    letter-spacing: 1px;
 }
 
 .hero-actions {
@@ -3095,15 +3131,25 @@ footer {
 
 @media (max-width: 768px) {
     .home-hero {
-        padding: 5rem 0 4rem;
+        padding: 6rem 0 5rem;
+        background-attachment: scroll;
     }
 
     .hero-title {
-        font-size: 2.5rem;
+        font-size: 2.2rem;
+        letter-spacing: 1px;
+    }
+
+    .hero-divider {
+        margin: 0 0.75rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1.125rem;
     }
 
     .hero-description {
-        font-size: 1.125rem;
+        font-size: 0.95rem;
     }
 
     .home-main section {
