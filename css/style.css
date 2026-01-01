@@ -1187,6 +1187,28 @@ main {
     color: var(--secondary-color);
 }
 
+/* 表单消息提示 */
+.form-message {
+    margin: 1.5rem 0;
+    text-align: center;
+}
+
+.success-message {
+    padding: 1rem;
+    background: #E8F0ED;
+    color: var(--primary-color);
+    border-radius: 8px;
+    font-weight: 600;
+}
+
+.error-message {
+    padding: 1rem;
+    background: #FFE8E8;
+    color: #D32F2F;
+    border-radius: 8px;
+    font-weight: 600;
+}
+
 .btn-primary-large {
     display: inline-block;
     padding: 1rem 3rem;
