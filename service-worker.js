@@ -1,6 +1,6 @@
 // Service Worker for Easezy PWA
-const CACHE_NAME = 'easezy-v2.0.0';
-const RUNTIME_CACHE = 'easezy-runtime-v2.0.0';
+const CACHE_NAME = 'easezy-v2.1.0';
+const RUNTIME_CACHE = 'easezy-runtime-v2.1.0';
 
 // 需要预缓存的核心资源
 const PRECACHE_URLS = [

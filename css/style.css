@@ -2725,26 +2725,11 @@ footer {
 /* Hero Section */
 .home-hero {
     position: relative;
-    background: transparent;
-    /* 添加背景图片位置 - 用户可以替换为自己的图片 */
-    background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=2070');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
+    background: linear-gradient(135deg, #1a2f2a 0%, #0f1419 100%);
     padding: 10rem 0 8rem;
     color: white;
     text-align: center;
     overflow: hidden;
-}
-
-.hero-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(135deg, rgba(15, 20, 25, 0.85) 0%, rgba(26, 47, 42, 0.75) 100%);
-    z-index: 1;
 }
 
 .hero-content {
