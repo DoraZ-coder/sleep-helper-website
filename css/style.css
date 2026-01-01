@@ -135,10 +135,11 @@ main {
 }
 
 .feature-item {
-    background: var(--white);
+    background: var(--card-bg);
+    border: 1px solid #21262d;
     padding: 2rem;
     border-radius: 12px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
     transition: transform 0.3s;
 }
 
@@ -191,7 +192,7 @@ main {
 .btn-secondary {
     display: inline-block;
     padding: 0.8rem 2rem;
-    background: var(--white);
+    background: var(--card-bg);
     color: var(--secondary-color);
     text-decoration: none;
     border-radius: 50px;
@@ -252,10 +253,10 @@ main {
 
 .question-card {
     display: none;
-    background: var(--white);
+    background: var(--card-bg);
     padding: 3rem;
     border-radius: 16px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
     margin-bottom: 2rem;
 }
 
@@ -347,10 +348,10 @@ main {
 }
 
 .result-card {
-    background: var(--white);
+    background: var(--card-bg);
     padding: 3rem;
     border-radius: 16px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
 }
 
 .sleep-type {
@@ -480,10 +481,10 @@ main {
 }
 
 .plan-card {
-    background: var(--white);
+    background: var(--card-bg);
     padding: 2.5rem;
     border-radius: 16px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
     position: relative;
     transition: transform 0.3s;
 }
@@ -573,10 +574,10 @@ main {
 }
 
 .plan-card-single {
-    background: var(--white);
+    background: var(--card-bg);
     padding: 3rem;
     border-radius: 16px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
     max-width: 600px;
     width: 100%;
     text-align: center;
@@ -655,7 +656,7 @@ main {
 
 .content-tab {
     padding: 0.8rem 2rem;
-    background: var(--white);
+    background: var(--card-bg);
     color: var(--text-color);
     border: 2px solid var(--light-gray);
     border-radius: 25px;
@@ -690,10 +691,10 @@ main {
 }
 
 .article-card {
-    background: var(--white);
+    background: var(--card-bg);
     padding: 2rem;
     border-radius: 12px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
     margin-bottom: 2rem;
 }
 
@@ -751,10 +752,10 @@ main {
 }
 
 .membership-card {
-    background: var(--white);
+    background: var(--card-bg);
     padding: 2.5rem;
     border-radius: 16px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
     text-align: center;
 }
 
@@ -808,7 +809,7 @@ main {
 /* ==================== 关于我们页面 ==================== */
 
 .about-main {
-    background: #FAFAFA;
+    background: linear-gradient(180deg, #1a2f2a 0%, #0f1419 30%, #0f1419 70%, #161b22 100%);
 }
 
 /* 窄容器 - 用于文字密集区域 */
@@ -850,7 +851,7 @@ main {
 
 /* Hero Slogan */
 .hero-slogan {
-    background: linear-gradient(135deg, #7FA59A 0%, #6B9188 100%);
+    background: transparent;
     padding: 8rem 0;
     text-align: center;
     color: white;
@@ -871,7 +872,7 @@ main {
 
 /* 我们的本心 */
 .section-heart {
-    background: white;
+    background: transparent;
 }
 
 .heart-content {
@@ -893,7 +894,7 @@ main {
 
 /* 我们的优势 */
 .section-advantages {
-    background: #F8FCFB;
+    background: transparent;
 }
 
 .advantages-grid {
@@ -904,16 +905,18 @@ main {
 }
 
 .advantage-card {
-    background: white;
+    background: var(--card-bg);
     padding: 2.5rem;
     border-radius: 16px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid #21262d;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
 }
 
 .advantage-card:hover {
     transform: translateY(-8px);
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+    background: var(--card-hover-bg);
+    border-color: rgba(141, 181, 168, 0.3);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
 }
 
 .advantage-icon {
@@ -935,7 +938,7 @@ main {
 
 /* 服务理念 */
 .section-philosophy {
-    background: white;
+    background: transparent;
 }
 
 .philosophy-intro {
@@ -975,8 +978,10 @@ main {
 
 /* 365天服务板块 - 特殊样式 */
 .section-365 {
-    background: linear-gradient(135deg, #7FA59A 0%, #5E8C7F 100%);
+    background: rgba(26, 47, 42, 0.3);
     padding: 6rem 0;
+    border-top: 1px solid rgba(141, 181, 168, 0.1);
+    border-bottom: 1px solid rgba(141, 181, 168, 0.1);
 }
 
 .service-365-wrapper {
@@ -1048,7 +1053,7 @@ main {
 
 /* 我们的团队 */
 .section-team {
-    background: #F8FCFB;
+    background: transparent;
 }
 
 .team-content {
@@ -1064,9 +1069,11 @@ main {
 .team-vision {
     margin-top: 3rem;
     padding: 2.5rem;
-    background: white;
+    background: var(--card-bg);
     border-left: 4px solid var(--primary-color);
     border-radius: 8px;
+    border: 1px solid #21262d;
+    border-left-width: 4px;
 }
 
 .vision-text {
@@ -1085,7 +1092,7 @@ main {
 
 /* 联系我们 */
 .section-contact {
-    background: white;
+    background: transparent;
 }
 
 .contact-intro {
@@ -1119,8 +1126,8 @@ main {
 .form-group textarea {
     width: 100%;
     padding: 1rem 1.5rem;
-    background: white;
-    border: 2px solid #E8F0ED;
+    background: var(--card-bg);
+    border: 2px solid #21262d;
     border-radius: 8px;
     color: var(--text-color);
     font-size: 1rem;
@@ -1137,7 +1144,7 @@ main {
 .form-group textarea:focus {
     outline: none;
     border-color: var(--primary-color);
-    background: #F8FCFB;
+    background: var(--card-hover-bg);
 }
 
 .form-group textarea {
@@ -1321,10 +1328,10 @@ footer {
 
 /* 报告主内容区 */
 .report-main-content {
-    background: var(--white);
+    background: var(--card-bg);
     padding: 3rem;
     border-radius: 16px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     min-height: 600px;
 }
 
@@ -1438,10 +1445,10 @@ footer {
 }
 
 .report-content {
-    background: var(--white);
+    background: var(--card-bg);
     padding: 3rem;
     border-radius: 16px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
     margin-bottom: 3rem;
 }
 
@@ -1632,7 +1639,7 @@ footer {
 }
 
 .article-preview {
-    background: var(--white);
+    background: var(--card-bg);
     border-radius: 16px;
     padding: 2rem;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
@@ -1713,7 +1720,7 @@ footer {
     max-width: 900px;
     margin: 0 auto;
     padding: 2rem;
-    background: var(--white);
+    background: var(--card-bg);
     border-radius: 16px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
     animation: fadeIn 0.3s ease;
@@ -1842,10 +1849,11 @@ footer {
 
 /* 左侧播放列表 */
 .playlist-sidebar {
-    background: var(--white);
+    background: var(--card-bg);
+    border: 1px solid #21262d;
     border-radius: 16px;
     padding: 2rem;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
     max-height: calc(100vh - 350px);
     overflow-y: auto;
 }
@@ -1877,7 +1885,7 @@ footer {
 }
 
 .collection-header:hover {
-    background: var(--bg-color);
+    background: var(--card-hover-bg);
 }
 
 .collection-info {
@@ -1900,7 +1908,7 @@ footer {
 .track-count {
     font-size: 0.85rem;
     color: var(--secondary-text);
-    background: var(--bg-color);
+    background: rgba(141, 181, 168, 0.1);
     padding: 0.2rem 0.6rem;
     border-radius: 12px;
 }
@@ -1937,11 +1945,11 @@ footer {
 }
 
 .track-item:hover {
-    background: var(--bg-color);
+    background: var(--card-hover-bg);
 }
 
 .track-item.playing {
-    background: linear-gradient(135deg, rgba(127, 165, 154, 0.1), rgba(107, 142, 132, 0.1));
+    background: rgba(141, 181, 168, 0.15);
 }
 
 .track-item.playing .track-number {
@@ -1973,7 +1981,8 @@ footer {
 
 /* 右侧当前播放信息 */
 .now-playing {
-    background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
+    background: linear-gradient(135deg, #1a2f2a 0%, #243832 100%);
+    border: 1px solid rgba(141, 181, 168, 0.2);
     border-radius: 16px;
     padding: 3rem;
     display: flex;
@@ -2019,9 +2028,9 @@ footer {
     bottom: 0;
     left: 0;
     right: 0;
-    background: var(--white);
-    border-top: 1px solid var(--light-gray);
-    box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.08);
+    background: var(--card-bg);
+    border-top: 1px solid #21262d;
+    box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.4);
     z-index: 1000;
 }
 
@@ -2045,7 +2054,7 @@ footer {
 .controls-album-art {
     width: 56px;
     height: 56px;
-    background: var(--bg-color);
+    background: rgba(141, 181, 168, 0.1);
     border-radius: 8px;
     display: flex;
     align-items: center;
@@ -2106,7 +2115,7 @@ footer {
 }
 
 .control-btn:hover {
-    background: var(--bg-color);
+    background: rgba(141, 181, 168, 0.1);
     color: var(--secondary-color);
 }
 
@@ -2166,7 +2175,7 @@ footer {
     transform: translate(-50%, -50%);
     width: 14px;
     height: 14px;
-    background: white;
+    background: var(--card-bg);
     border: 2px solid var(--secondary-color);
     border-radius: 50%;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
@@ -2304,16 +2313,19 @@ footer {
 }
 
 .stat-card {
-    background: var(--white);
+    background: var(--card-bg);
+    border: 1px solid #21262d;
     border-radius: 16px;
     padding: 1.5rem;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    transition: transform 0.3s;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s, background 0.3s, border-color 0.3s;
     text-align: center;
 }
 
 .stat-card:hover {
     transform: translateY(-3px);
+    background: var(--card-hover-bg);
+    border-color: rgba(141, 181, 168, 0.3);
 }
 
 .stat-content {
@@ -2348,10 +2360,11 @@ footer {
 }
 
 .form-card {
-    background: var(--white);
+    background: var(--card-bg);
+    border: 1px solid #21262d;
     border-radius: 16px;
     padding: 2rem;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 .form-card h2 {
@@ -2378,16 +2391,19 @@ footer {
 .form-group textarea {
     width: 100%;
     padding: 0.75rem;
-    border: 2px solid var(--light-gray);
+    background: var(--bg-color);
+    border: 2px solid #21262d;
     border-radius: 8px;
+    color: var(--text-color);
     font-size: 1rem;
-    transition: border-color 0.3s;
+    transition: border-color 0.3s, background 0.3s;
 }
 
 .form-group input:focus,
 .form-group textarea:focus {
     outline: none;
     border-color: var(--secondary-color);
+    background: var(--card-hover-bg);
 }
 
 .form-group textarea {
@@ -2405,7 +2421,7 @@ footer {
     flex: 1;
     padding: 0.75rem 0.5rem;
     background: var(--bg-color);
-    border: 2px solid var(--light-gray);
+    border: 2px solid #21262d;
     border-radius: 8px;
     cursor: pointer;
     transition: all 0.3s;
@@ -2448,7 +2464,7 @@ footer {
 .mood-btn {
     padding: 0.75rem;
     background: var(--bg-color);
-    border: 2px solid var(--light-gray);
+    border: 2px solid #21262d;
     border-radius: 8px;
     cursor: pointer;
     transition: all 0.3s;
@@ -2488,10 +2504,11 @@ footer {
 }
 
 .chart-card {
-    background: var(--white);
+    background: var(--card-bg);
+    border: 1px solid #21262d;
     border-radius: 16px;
     padding: 2rem;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 .chart-card h3 {
@@ -2506,10 +2523,11 @@ footer {
 
 /* 历史记录 */
 .diary-history {
-    background: var(--white);
+    background: var(--card-bg);
+    border: 1px solid #21262d;
     border-radius: 16px;
     padding: 2rem;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 .history-header {
@@ -2588,7 +2606,7 @@ footer {
 
 .history-actions button {
     padding: 0.4rem 0.8rem;
-    background: var(--white);
+    background: var(--card-bg);
     border: 1px solid var(--light-gray);
     border-radius: 6px;
     cursor: pointer;
@@ -2878,7 +2896,7 @@ footer {
 .btn-highlight {
     display: inline-block;
     padding: 1rem 2.5rem;
-    background: white;
+    background: var(--card-bg);
     color: var(--primary-color);
     text-decoration: none;
     border-radius: 50px;
