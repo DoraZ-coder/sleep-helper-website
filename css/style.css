@@ -802,179 +802,381 @@ main {
 }
 
 /* 关于页面样式 */
-.about-section {
-    max-width: 900px;
+/* ==================== 关于我们页面 ==================== */
+
+.about-main {
+    background: #FAFAFA;
+}
+
+/* 窄容器 - 用于文字密集区域 */
+.container-narrow {
+    max-width: 800px;
     margin: 0 auto;
+    padding: 0 2rem;
 }
 
-.about-header {
-    text-align: center;
-    margin-bottom: 3rem;
+/* Section 通用样式 */
+.about-main section {
+    padding: 6rem 0;
 }
 
-.about-header h1 {
-    font-size: 2.5rem;
+.section-label {
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
     color: var(--primary-color);
+    margin-bottom: 1rem;
 }
 
-.about-content {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
+.section-label.light {
+    color: rgba(255, 255, 255, 0.8);
 }
 
-.about-card {
-    background: var(--white);
-    padding: 2.5rem;
-    border-radius: 16px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+.section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--text-color);
+    margin-bottom: 2rem;
+    line-height: 1.2;
 }
 
-.about-card h2 {
-    font-size: 1.8rem;
-    color: var(--secondary-color);
+.section-title.light {
+    color: white;
+}
+
+/* Hero Slogan */
+.hero-slogan {
+    background: linear-gradient(135deg, #7FA59A 0%, #6B9188 100%);
+    padding: 8rem 0;
+    text-align: center;
+    color: white;
+}
+
+.hero-title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+}
+
+.hero-subtitle {
+    font-size: 1.5rem;
+    opacity: 0.95;
+    font-weight: 300;
+}
+
+/* 我们的本心 */
+.section-heart {
+    background: white;
+}
+
+.heart-content {
+    font-size: 1.125rem;
+    line-height: 2;
+    color: var(--secondary-text);
+}
+
+.heart-content p {
     margin-bottom: 1.5rem;
 }
 
-.placeholder-text {
-    color: var(--secondary-text);
-    line-height: 1.8;
-}
-
-.placeholder-text p {
-    margin-bottom: 1rem;
-}
-
-.placeholder-text ul {
-    padding-left: 1.5rem;
-    margin-top: 1rem;
-}
-
-.placeholder-text li {
-    margin-bottom: 0.5rem;
-}
-
-.about-card p {
-    line-height: 1.8;
-    margin-bottom: 1rem;
-    color: var(--text-color);
-}
-
-.about-card ul {
-    padding-left: 1.5rem;
-    margin: 1rem 0;
-}
-
-.about-card li {
-    margin-bottom: 0.8rem;
-    line-height: 1.6;
-}
-
-/* 服务支柱 */
-.service-pillar {
-    margin-bottom: 2rem;
-    padding-bottom: 2rem;
-    border-bottom: 1px solid #E8F0ED;
-}
-
-.service-pillar:last-child {
-    border-bottom: none;
-    margin-bottom: 0;
-    padding-bottom: 0;
-}
-
-.service-pillar h3 {
-    font-size: 1.4rem;
-    color: var(--primary-color);
-    margin-bottom: 1rem;
-}
-
-/* 承诺列表 */
-.promise-list {
-    list-style: none;
-    padding-left: 0;
-}
-
-.promise-list li {
-    padding-left: 2rem;
-    position: relative;
-    margin-bottom: 1rem;
-}
-
-.promise-list li::before {
-    content: "✓";
-    position: absolute;
-    left: 0;
-    color: var(--primary-color);
-    font-weight: bold;
-    font-size: 1.2rem;
-}
-
-/* 价值表格 */
-.value-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 1.5rem;
-}
-
-.value-table th {
-    background: var(--secondary-color);
-    color: white;
-    padding: 1rem;
-    text-align: left;
+.highlight-text {
+    font-size: 1.375rem;
     font-weight: 600;
+    color: var(--primary-color);
+    padding: 1.5rem 0;
 }
 
-.value-table td {
-    padding: 1rem;
-    border-bottom: 1px solid #E8F0ED;
-}
-
-.value-table tr:last-child td {
-    border-bottom: none;
-}
-
-.value-table tr:hover {
+/* 我们的优势 */
+.section-advantages {
     background: #F8FCFB;
 }
 
-/* 愿景声明 */
-.vision-statement {
-    font-size: 1.2rem;
+.advantages-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.advantage-card {
+    background: white;
+    padding: 2.5rem;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.advantage-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+}
+
+.advantage-icon {
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+}
+
+.advantage-card h3 {
+    font-size: 1.375rem;
+    font-weight: 600;
+    color: var(--secondary-color);
+    margin-bottom: 1rem;
+}
+
+.advantage-card p {
+    line-height: 1.7;
+    color: var(--secondary-text);
+}
+
+/* 服务理念 */
+.section-philosophy {
+    background: white;
+}
+
+.philosophy-intro {
+    font-size: 1.125rem;
+    text-align: center;
+    color: var(--secondary-text);
+    margin-bottom: 3rem;
+}
+
+.philosophy-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2.5rem;
+    margin-top: 2rem;
+}
+
+.philosophy-item {
+    text-align: center;
+}
+
+.philosophy-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.philosophy-item h4 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-color);
+    margin-bottom: 0.75rem;
+}
+
+.philosophy-item p {
+    line-height: 1.7;
+    color: var(--secondary-text);
+}
+
+/* 365天服务板块 - 特殊样式 */
+.section-365 {
+    background: linear-gradient(135deg, #7FA59A 0%, #5E8C7F 100%);
+    padding: 6rem 0;
+}
+
+.service-365-wrapper {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.service-365-header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.service-365-subtitle {
+    font-size: 1.25rem;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 300;
+}
+
+.service-365-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 2rem;
+}
+
+.service-365-card {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    padding: 2.5rem 2rem;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+}
+
+.service-365-card:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: translateY(-5px);
+}
+
+.service-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.5);
+    margin-bottom: 1rem;
+}
+
+.service-365-card h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: white;
+    margin-bottom: 1rem;
+}
+
+.service-365-card p {
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* 我们的团队 */
+.section-team {
+    background: #F8FCFB;
+}
+
+.team-content {
+    font-size: 1.125rem;
+    line-height: 2;
+    color: var(--secondary-text);
+}
+
+.team-content p {
+    margin-bottom: 1.5rem;
+}
+
+.team-vision {
+    margin-top: 3rem;
+    padding: 2.5rem;
+    background: white;
+    border-left: 4px solid var(--primary-color);
+    border-radius: 8px;
+}
+
+.vision-text {
+    font-size: 1.375rem;
     font-weight: 600;
     color: var(--primary-color);
-    margin-top: 1.5rem;
-    padding: 1.5rem;
-    background: #E8F0ED;
-    border-radius: 8px;
-    text-align: center;
+    font-style: italic;
+    margin-bottom: 1rem;
 }
 
-/* 结束语 */
-.closing-message {
-    text-align: center;
-    background: linear-gradient(135deg, #E8F0ED 0%, #F8FCFB 100%);
-    border: 2px solid var(--primary-color);
+.vision-author {
+    font-size: 1rem;
+    color: var(--secondary-text);
+    font-style: italic;
 }
 
-.closing-message p {
-    font-size: 1.1rem;
+/* 联系我们 */
+.section-contact {
+    background: white;
+}
+
+.contact-intro {
+    font-size: 1.125rem;
+    text-align: center;
+    color: var(--secondary-text);
+    margin-bottom: 3rem;
+}
+
+.contact-methods {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-bottom: 4rem;
+}
+
+.contact-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+    padding: 2rem;
+    background: #F8FCFB;
+    border-radius: 12px;
+}
+
+.contact-icon {
+    font-size: 2.5rem;
+}
+
+.contact-info h4 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--text-color);
     margin-bottom: 0.5rem;
 }
 
-.signature {
-    margin-top: 2rem;
-    font-style: italic;
-    color: var(--secondary-color);
+.contact-info a {
+    color: var(--primary-color);
+    text-decoration: none;
     font-weight: 500;
 }
 
-.about-note {
-    background: #E8F0ED;
-    padding: 2rem;
-    border-radius: 12px;
+.contact-info a:hover {
+    text-decoration: underline;
+}
+
+.contact-info p {
+    color: var(--secondary-text);
+    line-height: 1.6;
+}
+
+.contact-cta {
     text-align: center;
-    margin-top: 2rem;
+    padding: 3rem 2rem;
+    background: linear-gradient(135deg, #E8F0ED 0%, #F8FCFB 100%);
+    border-radius: 16px;
+}
+
+.contact-cta p {
+    font-size: 1.25rem;
+    color: var(--text-color);
+    margin-bottom: 1.5rem;
+}
+
+.btn-primary-large {
+    display: inline-block;
+    padding: 1rem 3rem;
+    background: var(--primary-color);
+    color: white;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 1.125rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(127, 165, 154, 0.3);
+}
+
+.btn-primary-large:hover {
+    background: var(--secondary-color);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(127, 165, 154, 0.4);
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 2.5rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1.125rem;
+    }
+
+    .section-title {
+        font-size: 2rem;
+    }
+
+    .about-main section {
+        padding: 4rem 0;
+    }
+
+    .advantages-grid,
+    .philosophy-grid,
+    .service-365-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
 /* 页脚 */
