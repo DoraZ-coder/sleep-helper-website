@@ -854,6 +854,121 @@ main {
     margin-bottom: 0.5rem;
 }
 
+.about-card p {
+    line-height: 1.8;
+    margin-bottom: 1rem;
+    color: var(--text-color);
+}
+
+.about-card ul {
+    padding-left: 1.5rem;
+    margin: 1rem 0;
+}
+
+.about-card li {
+    margin-bottom: 0.8rem;
+    line-height: 1.6;
+}
+
+/* 服务支柱 */
+.service-pillar {
+    margin-bottom: 2rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid #E8F0ED;
+}
+
+.service-pillar:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.service-pillar h3 {
+    font-size: 1.4rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+/* 承诺列表 */
+.promise-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.promise-list li {
+    padding-left: 2rem;
+    position: relative;
+    margin-bottom: 1rem;
+}
+
+.promise-list li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: var(--primary-color);
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+/* 价值表格 */
+.value-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1.5rem;
+}
+
+.value-table th {
+    background: var(--secondary-color);
+    color: white;
+    padding: 1rem;
+    text-align: left;
+    font-weight: 600;
+}
+
+.value-table td {
+    padding: 1rem;
+    border-bottom: 1px solid #E8F0ED;
+}
+
+.value-table tr:last-child td {
+    border-bottom: none;
+}
+
+.value-table tr:hover {
+    background: #F8FCFB;
+}
+
+/* 愿景声明 */
+.vision-statement {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-top: 1.5rem;
+    padding: 1.5rem;
+    background: #E8F0ED;
+    border-radius: 8px;
+    text-align: center;
+}
+
+/* 结束语 */
+.closing-message {
+    text-align: center;
+    background: linear-gradient(135deg, #E8F0ED 0%, #F8FCFB 100%);
+    border: 2px solid var(--primary-color);
+}
+
+.closing-message p {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+}
+
+.signature {
+    margin-top: 2rem;
+    font-style: italic;
+    color: var(--secondary-color);
+    font-weight: 500;
+}
+
 .about-note {
     background: #E8F0ED;
     padding: 2rem;
