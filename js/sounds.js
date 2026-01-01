@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const volumeRange = document.getElementById('volumeRange');
     const progressBar = document.querySelector('.progress-bar');
     const progressFill = document.querySelector('.progress-fill');
+    const progressHandle = document.querySelector('.progress-handle');
     const timeCurrent = document.querySelector('.time-current');
     const timeTotal = document.querySelector('.time-total');
 
@@ -30,6 +31,7 @@ document.addEventListener('DOMContentLoaded', function() {
     let isPlaying = false;
     let loopMode = 'none'; // 'one' = 单曲循环, 'none' = 顺序播放
     let isDragging = false; // 是否正在拖动进度条
+    let volumeBeforeDrag = 0; // 拖动前的音量
 
     // 初始化
     init();
@@ -219,6 +221,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const percent = (audioPlayer.currentTime / audioPlayer.duration) * 100;
         progressFill.style.width = percent + '%';
+        progressHandle.style.left = percent + '%';
 
         timeCurrent.textContent = formatTime(audioPlayer.currentTime);
     }
@@ -243,6 +246,11 @@ document.addEventListener('DOMContentLoaded', function() {
         e.preventDefault();
         isDragging = true;
         progressBar.style.cursor = 'grabbing';
+
+        // 保存当前音量并静音
+        volumeBeforeDrag = audioPlayer.volume;
+        audioPlayer.volume = 0;
+
         updateProgressByEvent(e);
     }
 
@@ -258,6 +266,9 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!isDragging) return;
         isDragging = false;
         progressBar.style.cursor = 'pointer';
+
+        // 恢复音量
+        audioPlayer.volume = volumeBeforeDrag;
     }
 
     // 根据鼠标/触摸位置更新进度
@@ -276,9 +287,10 @@ document.addEventListener('DOMContentLoaded', function() {
         let percent = (clientX - rect.left) / rect.width;
         percent = Math.max(0, Math.min(1, percent));
 
-        // 更新音频时间和进度条
+        // 更新音频时间、进度条和小圆点
         audioPlayer.currentTime = percent * audioPlayer.duration;
         progressFill.style.width = (percent * 100) + '%';
+        progressHandle.style.left = (percent * 100) + '%';
         timeCurrent.textContent = formatTime(audioPlayer.currentTime);
     }
 
